@@ -80,6 +80,7 @@ if __name__=="__main__":
     vector=Vector3()
     flag=Bool()
     flag.data=False
+
     try:
         Set_pub()
     except rospy.ROSInterruptException: pass
