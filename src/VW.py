@@ -1,16 +1,16 @@
 class VW():
-    def __init__(self,Sub_data,D,V_slow):
-        self.r=Sub_data.R
-        self.dir=Sub_data.d
-        self.d=D
-        self.v_slow=V_slow
-        self.v_fast=self.v_slow*((self.r+self.d)/(self.r-self.d))
+    def __init__(self,Turning_info,d,v_slow):
+        self.r=Turning_info.Radius
+        self.Direction=Turning_info.Direction
+        self.D=d
+        self.V_Slow=v_slow
+        self.V_Fast=self.V_Slow*((self.r+self.D)/(self.r-self.D))
 
     def V(self):
-        return (self.v_slow+self.v_fast)/2
+        return (self.V_Slow+self.V_Fast)/2
 
     def W(self):
-        if self.dir=="r":
-            return (self.v_slow-self.v_fast)/(2*self.d)
-        elif self.dir=="l":
-            return (self.v_fast-self.v_slow)/(2*self.d)
+        if self.Direction=="r":
+            return (self.V_Slow-self.V_Fast)/(2*self.D)
+        elif self.Direction=="l":
+            return (self.V_Fast-self.V_Slow)/(2*self.D)

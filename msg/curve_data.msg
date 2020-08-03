@@ -1,2 +1,2 @@
-float64 R
-string d
+float64 Radius
+string Direction
