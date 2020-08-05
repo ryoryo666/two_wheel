@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="model" default="$(find two_wheel)/urdf/robo.xacro"/>
+  <arg name="rvizconfig" default="$(find two_wheel)/urdf/urdf.rviz" />
+
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+
+  <node name="pose_info" pkg="two_wheel" type="pose_of_two_wheel.py" output="screen"/>
+  <node name="pose_br" pkg="two_wheel" type="pose_broadcaster.py"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+</launch>
