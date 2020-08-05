@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <launch>
-  <node name="robot_move" pkg="two_wheel" type="pose_of_two_wheel.py" output="screen"/>
+  <node name="pose_info" pkg="two_wheel" type="pose_of_two_wheel.py" output="screen"/>
+  <node name="pose_br" pkg="two_wheel" type="pose_broadcaster.py"/>
 </launch>

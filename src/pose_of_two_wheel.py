@@ -33,23 +33,22 @@ def pub():
     pose.x=0.0
     pose.y=0.0
     pose.theta=math.radians(90)
-    r=rospy.Rate(1)
+    r=rospy.Rate(10)
 
     D=0.3           # Wheel-center distance
     straight_v=2    # Center vector [m/s]
     v_slow=1            # Inner ring vector [m/s]
     t=Time()
     t.data=0.0
-    dt=1
-
+    dt=0.1
 
     while not rospy.is_shutdown():
         t.data+=dt
 
         # Straight
         if Turning_info.Radius == 0 and flag.data==True:
-            vector.linear.x= v_slow * math.cos(pose.theta)
-            vector.linear.y= v_slow * math.sin(pose.theta)
+            vector.linear.x= straight_v * math.cos(pose.theta)
+            vector.linear.y= straight_v * math.sin(pose.theta)
 
             pose.x = pose.x + vector.linear.x*dt
             pose.y = pose.y + vector.linear.y*dt
@@ -66,7 +65,7 @@ def pub():
             pose.y = pose.y + vector.linear.y*dt
             pose.theta = pose.theta + vector.angular.z*dt
 
-        print("%d sec" % t.data)
+        print("%f sec" % t.data)
         print(pose)
         print("")
         pub.publish(pose)
