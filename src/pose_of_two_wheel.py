@@ -6,6 +6,7 @@ from geometry_msgs.msg import Pose2D
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Time
 from std_msgs.msg import Bool
+from std_msgs.msg import String
 from two_wheel.msg import curve_data
 import VW
 import math
@@ -15,14 +16,14 @@ def callback(data):
     Turning_info.Radius=data.Radius
     Turning_info.Direction=data.Direction
     flag.data=True
-    if Turning_info.Radius==0:
+    if Turning_info.Direction=="s":
+        flag.data=False
+        print("Robot stop")
+    elif Turning_info.Radius==0:
         print("Straight")
     elif Turning_info.Radius != 0:
         print("Curve:R=%f" % Turning_info.Radius)
         print("Direction:%s (r:Right l:Left)" %Turning_info.Direction)
-    elif Turning_info.Radius < 0:
-        flag.data=False
-    print("Move Start!!\n")
 
 
 def pub():
@@ -36,8 +37,8 @@ def pub():
     r=rospy.Rate(10)
 
     D=0.3           # Wheel-center distance
-    straight_v=2    # Center vector [m/s]
-    v_slow=1            # Inner ring vector [m/s]
+    straight_v=0.5    # Center vector [m/s]
+    v_slow=0.5            # Inner ring vector [m/s]
     t=Time()
     t.data=0.0
     dt=0.1
