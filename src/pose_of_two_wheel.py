@@ -6,7 +6,6 @@ from geometry_msgs.msg import Pose2D
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Time
 from std_msgs.msg import Bool
-from std_msgs.msg import String
 from two_wheel.msg import curve_data
 import VW
 import math
@@ -28,7 +27,7 @@ def callback(data):
 
 def pub():
     rospy.init_node("robot_pose_publisher", anonymous=True)
-    rospy.Subscriber("curve", curve_data, callback)
+    rospy.Subscriber("turning_info", curve_data, callback)
     pub=rospy.Publisher("pose", Pose2D, queue_size=10)
 
     pose.x=0.0
@@ -37,10 +36,9 @@ def pub():
     r=rospy.Rate(10)
 
     D=0.3           # Wheel-center distance
-    straight_v=0.5    # Center vector [m/s]
-    v_slow=0.5            # Inner ring vector [m/s]
-    t=Time()
-    t.data=0.0
+    vec_straight=0.5    # Center vector [m/s]
+    vec_inner=0.5            # Inner ring vector [m/s]
+    t=Time(data=0.0)
     dt=0.1
 
     while not rospy.is_shutdown():
@@ -48,16 +46,16 @@ def pub():
 
         # Straight
         if Turning_info.Radius == 0 and flag.data==True:
-            vector.linear.x= straight_v * math.cos(pose.theta)
-            vector.linear.y= straight_v * math.sin(pose.theta)
+            vector.linear.x= vec_straight * math.cos(pose.theta)
+            vector.linear.y= vec_straight * math.sin(pose.theta)
 
             pose.x = pose.x + vector.linear.x*dt
             pose.y = pose.y + vector.linear.y*dt
 
         # Curve
         elif Turning_info.Radius != 0 and flag.data==True:
-            vec=VW.VW(Turning_info,D,v_slow)
-            turning_v=vec.V()
+            vec=VW.VW(Turning_info,D,vec_inner)
+            turning_v=vec.V() #center vector
             vector.linear.x= turning_v * math.cos(pose.theta)
             vector.linear.y= turning_v * math.sin(pose.theta)
             vector.angular.z=vec.W()
@@ -66,20 +64,14 @@ def pub():
             pose.y = pose.y + vector.linear.y*dt
             pose.theta = pose.theta + vector.angular.z*dt
 
-        print("%f sec" % t.data)
-        print(pose)
-        print("")
         pub.publish(pose)
         r.sleep()
 
 if __name__=="__main__":
-    # Turning radius [m]
-    # Direction Right or left (r or l)
     Turning_info=curve_data()
     pose=Pose2D()
     vector=Twist()
-    flag=Bool()
-    flag.data=False
+    flag=Bool(data=False)
 
     try:
         pub()
