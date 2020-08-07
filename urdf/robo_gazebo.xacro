@@ -31,14 +31,38 @@
       </visual>
       <collision>
        <geometry>
-        <cylindey radius="0.1" length="0.05"/>
+        <cylinder radius="0.1" length="0.05"/>
        </geometry>
       </collision>
     </link>
     <gazebo reference="${prefix}_link">
      <material>Gazebo/Red</material>
     </gazebo>
-  </xacro:macro> 
+  </xacro:macro>
+
+  <xacro:macro name="ball_macro" params="parent prefix xyz">
+   <joint name="${prefix}_joint" type="fixed">
+     <parent link="${parent}"/>
+     <child  link="${prefix}_link"/>
+     <origin xyz="${xyz}" rpy="0 0 0"/>
+   </joint>
+   <link name="${prefix}_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.04" />
+      </geometry>
+      <material name="green" />
+    </visual>
+    <collision>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+     <geometry>
+      <sphere radius="0.04"/>
+     </geometry>
+     <material name="gray"/>
+    </collision>
+   </link>
+  </xacro:macro>
 
 
   <link name="world"/>
@@ -47,7 +71,7 @@
   <joint name="body_joint" type="fixed">
     <parent link="world"/>
     <child  link="body_link"/>
-    <origin xyz="0.1 0 0.1" rpy="0 0 0"/>
+    <origin xyz="0 0 0.1" rpy="0 0 0"/>
   </joint>
   <link name="body_link">
     <inertial>
@@ -75,31 +99,11 @@
   </gazebo>
 
 
-  <xacro:wheel_macro prefix="left_wheel"  parent="body_link" xyz="-0.1 0.13 0"/>
-  <xacro:wheel_macro prefix="right_wheel" parent="body_link" xyz="-0.1 -0.13 0"/>
+  <xacro:wheel_macro prefix="left_wheel"  parent="body_link" xyz="0 0.13 0"/>
+  <xacro:wheel_macro prefix="right_wheel" parent="body_link" xyz="0 -0.13 0"/>
+  <xacro:ball_macro prefix="front_caster" parent="body_link" xyz="0.15 0 -0.05"/>
+  <xacro:ball_macro prefix="back_caster" parent="body_link" xyz="-0.15 0 -0.05"/>
 
-
-  <joint name="ball_joint" type="fixed">
-    <parent link="body_link"/>
-    <child  link="ball_link"/>
-    <origin xyz="0.15 0 -0.05" rpy="0 0 0"/>
-  </joint>
-  <link name="ball_link">
-   <visual>
-     <origin xyz="0 0 0" rpy="0 0 0" />
-     <geometry>
-       <sphere radius="0.04" />
-     </geometry>
-     <material name="green" />
-   </visual>
-   <collision>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-    <geometry>
-     <sphere radius="0.04"/>
-    </geometry>
-    <material name="gray"/>
-   </collision>
-  </link>
 
   <gazebo reference="ball_link">
    <material>Gazebo/Gray</material>

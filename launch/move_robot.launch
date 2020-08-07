@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-  <arg name="model" default="$(find two_wheel)/urdf/robo.xacro"/>
+  <arg name="model" default="$(find two_wheel)/urdf/robo_rviz.xacro"/>
   <arg name="rvizconfig" default="$(find two_wheel)/urdf/urdf.rviz" />
 
   <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
