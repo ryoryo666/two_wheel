@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="dtw_robot" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="robo_gazebo" xmlns:xacro="http://ros.org/wiki/xacro">
   <material name="gray">
     <color rgba="0.5 0.5 0.5 2"/>
   </material>
@@ -16,7 +16,19 @@
       <parent link="${parent}"/>
       <child  link="${prefix}_link"/>
       <axis xyz="0 0 1" />
+      <limit velocity="12.0" effort="0.4"/>
+      <dynamics damping="0.1"/>
     </joint>
+    <transmission name="${prefix}_trans" type="SimpleTransmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}_joint">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}_motor">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
     <link name="${prefix}_link">
       <inertial>
        <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -37,6 +49,8 @@
     </link>
     <gazebo reference="${prefix}_link">
      <material>Gazebo/Red</material>
+     <mu1 value="2.5"/>
+     <mu2 value="2.5"/>
     </gazebo>
   </xacro:macro>
 
@@ -62,13 +76,22 @@
      <material name="gray"/>
     </collision>
    </link>
+   <gazebo reference="${prefix}_link">
+     <material>Gazebo/Green</material>
+     <mu1 value="0.5"/>
+     <mu2 value="0.5"/>
+   </gazebo>
   </xacro:macro>
+
+  <xacro:wheel_macro prefix="left_wheel"  parent="body_link" xyz="0 0.13 0"/>
+  <xacro:wheel_macro prefix="right_wheel" parent="body_link" xyz="0 -0.13 0"/>
+  <xacro:ball_macro prefix="front_caster" parent="body_link" xyz="0.14 0 -0.06"/>
+  <xacro:ball_macro prefix="back_caster" parent="body_link" xyz="-0.14 0 -0.06"/>
 
 
   <link name="world"/>
 
-
-  <joint name="body_joint" type="fixed">
+  <joint name="body_joint" type="planar">
     <parent link="world"/>
     <child  link="body_link"/>
     <origin xyz="0 0 0.1" rpy="0 0 0"/>
@@ -93,20 +116,15 @@
      </geometry>
     </collision>
   </link>
-
   <gazebo reference="body_link">
    <material>Gazebo/Gray</material>
   </gazebo>
 
-
-  <xacro:wheel_macro prefix="left_wheel"  parent="body_link" xyz="0 0.13 0"/>
-  <xacro:wheel_macro prefix="right_wheel" parent="body_link" xyz="0 -0.13 0"/>
-  <xacro:ball_macro prefix="front_caster" parent="body_link" xyz="0.15 0 -0.05"/>
-  <xacro:ball_macro prefix="back_caster" parent="body_link" xyz="-0.15 0 -0.05"/>
-
-
-  <gazebo reference="ball_link">
-   <material>Gazebo/Gray</material>
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/robo_gazebo</robotNamespace>
+      <legacyModeNS>true</legacyModeNS>
+    </plugin>
   </gazebo>
 
 </robot>

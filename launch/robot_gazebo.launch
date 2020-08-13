@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+  <launch>
+    <arg name="model" default="$(find two_wheel)/urdf/robo_gazebo.xacro"/>
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model) --inorder"/>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="paused" value="false"/>
+      <arg name="use_sim_time" value="truo"/>
+      <arg name="gui" value="true"/>
+      <arg name="headless" value="false"/>
+      <arg name="debug" value="false"/>
+    </include>
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model robo_gazebo"/>
+
+    <rosparam command="load" file="$(find two_wheel)/config/diff_drive_controller.yaml" ns="/robo_gazebo"/>
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/robo_gazebo"
+      args="diff_drive_controller"/>
+
+  </launch>
