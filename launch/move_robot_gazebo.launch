@@ -11,10 +11,20 @@
       <arg name="debug" value="false"/>
     </include>
 
-    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model robo_gazebo"/>
+    <node name="spawn_urdf"
+          pkg="gazebo_ros"
+          type="spawn_model"
+          args="-param robot_description -urdf -model robo_gazebo"/>
 
-    <rosparam command="load" file="$(find two_wheel)/config/diff_drive_controller.yaml" ns="/robo_gazebo"/>
-    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/robo_gazebo"
-      args="diff_drive_controller"/>
+    <rosparam command="load"
+              file="$(find two_wheel)/config/diff_drive_controller.yaml"
+              ns="/robot_gazebo"/>
+
+    <node name="controller_spawner"
+          pkg="controller_manager" 
+          type="spawner" respawn="false"
+          output="screen"
+          ns="/robot_gazebo"
+          args="diff_drive_controller"/>
 
   </launch>

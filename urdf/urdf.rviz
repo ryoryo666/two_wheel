@@ -8,6 +8,7 @@ Panels:
         - /Status1
         - /RobotModel1
         - /RobotModel1/Links1
+        - /TF1
       Splitter Ratio: 0.5
     Tree Height: 565
   - Class: rviz/Selection
@@ -114,7 +115,7 @@ Visualization Manager:
           Value: true
         world:
           Value: true
-      Marker Scale: 0.300000012
+      Marker Scale: 0.200000003
       Name: TF
       Show Arrows: false
       Show Axes: false
@@ -164,18 +165,18 @@ Visualization Manager:
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.0830737203
-        Y: 0.0339627042
-        Z: 0.0304718763
+        X: -0.000568333082
+        Y: -0.00257247058
+        Z: -0.0229484122
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.229795873
+      Pitch: 0.334797293
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.27223539
+      Yaw: 3.63223815
     Saved: ~
 Window Geometry:
   Displays:
