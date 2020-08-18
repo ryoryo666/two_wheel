@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
   <launch>
-    <arg name="model" default="$(find two_wheel)/urdf/robo_gazebo.xacro"/>
+    <arg name="model" default="$(find two_wheel)/urdf/main_robot.xacro"/>
     <param name="robot_description" command="$(find xacro)/xacro $(arg model) --inorder"/>
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">

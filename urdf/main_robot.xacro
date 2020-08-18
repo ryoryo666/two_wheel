@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<robot name="robo_gazebo" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find two_wheel)/urdf/color.xacro"/>
+  <xacro:include filename="$(find two_wheel)/urdf/wheel_macro.xacro"/>
+  <xacro:include filename="$(find two_wheel)/urdf/caster_macro.xacro"/>
+
+  <xacro:wheel_macro prefix="left_wheel"  parent="body_link" xyz="0 0.13 0"/>
+  <xacro:wheel_macro prefix="right_wheel" parent="body_link" xyz="0 -0.13 0"/>
+  <xacro:ball_macro prefix="front_caster" parent="body_link" xyz="0.14 0 -0.06"/>
+  <xacro:ball_macro prefix="back_caster" parent="body_link" xyz="-0.14 0 -0.06"/>
+
+  <link name="world"/>
+
+  <joint name="base_joint" type="planar">
+    <parent link="world"/>
+    <child link="body_link"/>
+    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+  </joint>
+
+  <link name="body_link">
+    <inertial>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+     <mass value="1.0"/>
+     <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.4 0.2 0.1" />
+      </geometry>
+      <material name="gray" />
+    </visual>
+    <collision>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+     <geometry>
+      <box size="0.4 0.18 0.1"/>
+     </geometry>
+    </collision>
+  </link>
+  <gazebo reference="body_link">
+   <material>Gazebo/Gray</material>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/robot_gazebo</robotNamespace>
+      <legacyModeNS>true</legacyModeNS>
+    </plugin>
+  </gazebo>
+
+</robot>
