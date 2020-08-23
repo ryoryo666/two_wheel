@@ -8,7 +8,7 @@ from sensor_msgs.msg import Joy
 from two_wheel.msg import curve_data
 
 #default
-V=0.1
+V=1.0
 R=0.0
 W=0.0
 
