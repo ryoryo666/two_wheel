@@ -8,8 +8,7 @@ from sensor_msgs.msg import Joy
 from two_wheel.msg import curve_data
 
 #default
-V=1.0
-R=0.0
+V=10*1000/3600   #[m/s]
 W=0.0
 
 def callback(data):
@@ -35,7 +34,7 @@ def callback2(joy):
 
 
 def set():
-    rospy.init_node("robot_twist_pub",anonymous=True)
+    rospy.init_node("joy_to_twist",anonymous=True)
     rospy.Subscriber("Turning_info", curve_data, callback)
     rospy.Subscriber("/joy", Joy, callback2)
     pub=rospy.Publisher("/robot_gazebo/diff_drive_controller/cmd_vel", Twist, queue_size=10)

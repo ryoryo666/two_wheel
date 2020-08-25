@@ -9,10 +9,10 @@
   <xacro:ball_macro prefix="front_caster" parent="body_link" xyz="0.14 0 -0.06"/>
   <xacro:ball_macro prefix="back_caster" parent="body_link" xyz="-0.14 0 -0.06"/>
 
-  <link name="world"/>
+  <link name="base_link"/>
 
-  <joint name="base_joint" type="planar">
-    <parent link="world"/>
+  <joint name="base_joint" type="fixed">
+    <parent link="base_link"/>
     <child link="body_link"/>
     <origin xyz="0 0 0.1" rpy="0 0 0"/>
   </joint>

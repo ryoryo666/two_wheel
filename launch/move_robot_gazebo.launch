@@ -27,8 +27,8 @@
           output="screen"
           ns="/robot_gazebo"
           args="diff_drive_controller"/>
-
+<!--
     <node name="joy" pkg="joy" type="joy_node"/>
     <node name="move_gazebo" pkg="two_wheel" type="move_gazebo.py"/>
-
+-->
   </launch>
