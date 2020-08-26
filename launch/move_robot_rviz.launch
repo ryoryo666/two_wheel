@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <launch>
 
-  <arg name="model" default="$(find two_wheel)/urdf/main_robot.xacro"/>
+  <arg name="model" default="$(find two_wheel)/urdf/main_robot_rviz.xacro"/>
+  <arg name="gui" default="true" />
   <arg name="rvizconfig" default="$(find two_wheel)/urdf/urdf.rviz" />
 
   <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
@@ -9,6 +10,8 @@
   <node name="pose_info" pkg="two_wheel" type="pose_of_two_wheel.py"/>
   <node name="pose_br" pkg="two_wheel" type="pose_broadcaster.py"/>
   <node name="turning_info_pub" pkg="two_wheel" type="turning_info_pub.py" output="screen"/>
+
+  <node if="$(arg gui)" name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/>
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 
