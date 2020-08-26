@@ -3,19 +3,6 @@
     <arg name="model" default="$(find two_wheel)/urdf/main_robot.xacro"/>
     <param name="robot_description" command="$(find xacro)/xacro $(arg model) --inorder"/>
 
-    <include file="$(find gazebo_ros)/launch/empty_world.launch">
-      <arg name="paused" value="false"/>
-      <arg name="use_sim_time" value="true"/>
-      <arg name="gui" value="true"/>
-      <arg name="headless" value="false"/>
-      <arg name="debug" value="false"/>
-    </include>
-
-    <node name="spawn_urdf"
-          pkg="gazebo_ros"
-          type="spawn_model"
-          args="-param robot_description -urdf -model robot_gazebo"/>
-
     <rosparam command="load"
               file="$(find two_wheel)/config/diff_drive_controller.yaml"
               ns="/robot_gazebo"/>
@@ -28,15 +15,12 @@
           ns="/robot_gazebo"
           args="diff_drive_controller"/>
 
-    <node name="robot_state_publisher"
-          pkg="robot_state_publisher"
+    <node name="robot_state_publisher"  
+          pkg="robot_state_publisher" 
           type="robot_state_publisher"
           respawn="false"
           output="screen">
       <remap from="/joint_states" to="/robot_gazebo/join_states"/>
     </node>
-
-    <node name="joy" pkg="joy" type="joy_node"/>
-    <node name="move_gazebo" pkg="two_wheel" type="move_gazebo.py" output="screen"/>
 
   </launch>

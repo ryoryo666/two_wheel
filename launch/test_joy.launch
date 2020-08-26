@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-  <launch>
-
-    <node name="joy" pkg="joy" type="joy_node" output="screen"/>
-    <node name="move_gazebo" pkg="two_wheel" type="move_gazebo.py"/>
-  </launch>
