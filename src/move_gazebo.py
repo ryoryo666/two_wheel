@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import rospy
-import readchar as rc
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Joy
 from two_wheel.msg import curve_data
