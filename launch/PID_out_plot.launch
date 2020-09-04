@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <launch>
 
+  <node name="PID_output_plotter" pkg="two_wheel" type="PID_output_plot.py" output="screen"/> 
   <node name="Arduino_node" pkg="rosserial_python" type="serial_node.py">
-    <param name="port" value="/dev/ttyACM0"/>
+    <param name="port" value="/dev/ttyACM1"/>
   </node>
 
 </launch>
