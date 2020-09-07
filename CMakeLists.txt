@@ -52,6 +52,7 @@ find_package(catkin REQUIRED COMPONENTS
  add_message_files(
    FILES
    curve_data.msg
+   PID.msg
  )
 
 ## Generate services in the 'srv' folder
@@ -71,7 +72,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
  generate_messages(
    DEPENDENCIES
-   geometry_msgs#   std_msgs
+   geometry_msgs
+   std_msgs
  )
 
 ################################################

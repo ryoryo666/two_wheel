@@ -2,31 +2,37 @@
 # -*- coding: utf-8 -*-
 
 import rospy
-from std_msgs.msg import Float32
+from two_wheel.msg import PID
 import os
 
-path="/home/students/catkin_ws/src/two_wheel/csv/plot_data.csv"
+path="/home/ryo/catkin_ws/src/two_wheel/csv/data.csv"
 count=0
 
 def callback(msg):
     global count
     global value
     value=msg.data
-    rospy.loginfo("value: %f", value)
+    time=msg.time/1000000
 
-    buf=str(count)+"."+str(value)+"\n"
+    rospy.loginfo("value: %f  time: %f", value,time)
+
+    buf=str(time)+","+str(value)+"\n"
     with open(path, mode="a") as f:
         f.write(buf)
     count+=1
 
 def listener():
     rospy.init_node("PID_getter", anonymous=False)
-    rospy.Subscriber("/Volume", Float32, callback)
+    rospy.Subscriber("/Volume", PID, callback)
     rospy.spin()
 
 if __name__=="__main__":
     if  not os.path.isfile(path):
          f=open(path, "a")
+         buf=str(0.0)+","+str(0.0)+"\n"
+         with open(path, mode="a") as f:
+             f.write(buf)
+         count+=1
          f.close()
 
     listener()
