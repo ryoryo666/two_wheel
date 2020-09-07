@@ -5,11 +5,9 @@ import rospy
 from two_wheel.msg import PID
 import os
 
-path="/home/ryo/catkin_ws/src/two_wheel/csv/data.csv"
-count=0
+path=rospy.get_param("/PID_output_plotter/csv_path")
 
 def callback(msg):
-    global count
     global value
     value=msg.data
     time=msg.time/1000000
@@ -19,7 +17,6 @@ def callback(msg):
     buf=str(time)+","+str(value)+"\n"
     with open(path, mode="a") as f:
         f.write(buf)
-    count+=1
 
 def listener():
     rospy.init_node("PID_getter", anonymous=False)
@@ -32,7 +29,6 @@ if __name__=="__main__":
          buf=str(0.0)+","+str(0.0)+"\n"
          with open(path, mode="a") as f:
              f.write(buf)
-         count+=1
          f.close()
 
     listener()
