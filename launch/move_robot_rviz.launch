@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-  <arg name="model" default="$(find two_wheel)/urdf/main_robot_rviz.xacro"/>
+  <arg name="model" default="$(find two_wheel)/urdf/main_robot.xacro"/>
   <arg name="gui" default="true" />
   <arg name="rvizconfig" default="$(find two_wheel)/urdf/urdf.rviz" />
 
