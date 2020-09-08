@@ -20,7 +20,7 @@ def callback(msg):
 
 def listener():
     rospy.init_node("PID_getter", anonymous=False)
-    rospy.Subscriber("/Volume", PID, callback)
+    rospy.Subscriber("/rpm_data", PID, callback)
     rospy.spin()
 
 if __name__=="__main__":
