@@ -17,9 +17,11 @@ def Target_pub():
     while not rospy.is_shutdown():
         Turning_direction=raw_input("\nTurning direction( r or l) >> ")
         if Turning_direction=="q":
-            print("\n --------------------------------- ")
+            print("\n")
+            print(" --------------------------------- ")
             print("|             Finish!             |")
-            print(" --------------------------------- \n")
+            print(" --------------------------------- ")
+            print("\n")
 
             break;
         Turning_radius=float(raw_input("Turning radius >> "))
