@@ -5,7 +5,7 @@ from std_msgs.msg import Float32
 import rospy
 import target_getter
 
-_base_speed=10.0*1000/3600        #[Km/h]　→　[m/s]
+_base_speed=0.25        #[Km/h]　→　[m/s]
 _Wheel_radius=0.08      #[m]
 _Wheel_separation=0.5   #[m]
 
