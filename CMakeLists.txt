@@ -53,6 +53,7 @@ find_package(catkin REQUIRED COMPONENTS
    FILES
    curve_data.msg
    PID.msg
+   target_curve.msg
  )
 
 ## Generate services in the 'srv' folder
