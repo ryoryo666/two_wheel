@@ -7,19 +7,21 @@ import os
 
 def callback(msg):
     global value,path
-    value=msg.data
-    time=msg.time/1000000
+    r_value=msg.r_data
+    r_time=msg.r_time/1000000
+    l_value=msg.l_data
+    l_time=msg.l_time/1000000
 
-    rospy.loginfo("value: %f  time: %f", value,time)
+    rospy.loginfo("value: %f  time: %f", r_value,r_time)
 
-    buf=str(time)+","+str(value)+"\n"
-    with open(path, mode="a") as f:
+    buf=str(r_time)+","+str(r_value)+"\n"
+    with open(r_path, mode="a") as f:
         f.write(buf)
 
 def listener():
     rospy.init_node("PID_getter_", anonymous=False)
     rospy.Subscriber("/rpm_data", PID, callback)
-    path=rospy.get_param('~csv_path')
+    r_path=rospy.get_param('~csv_path')
 
     if  not os.path.isfile(path):
         f=open(path, "a")
