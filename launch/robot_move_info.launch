@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<launch>
-  <node name="pose_info" pkg="two_wheel" type="pose_of_two_wheel.py"/>
-  <node name="turning_info_publisher" pkg="two_wheel" type="turning_info_pub.py" output="screen"/>
-</launch>
