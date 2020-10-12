@@ -5,10 +5,8 @@ import rospy
 from two_wheel.msg import PID
 import os
 
-path=rospy.get_param("/PID_output_plotter/csv_path")
-
 def callback(msg):
-    global value
+    global value,path
     value=msg.data
     time=msg.time/1000000
 
@@ -19,16 +17,20 @@ def callback(msg):
         f.write(buf)
 
 def listener():
-    rospy.init_node("PID_getter_right", anonymous=False)
+    rospy.init_node("PID_getter_", anonymous=False)
     rospy.Subscriber("/rpm_data", PID, callback)
-    rospy.spin()
+    path=rospy.get_param('~csv_path')
 
-if __name__=="__main__":
     if  not os.path.isfile(path):
-         f=open(path, "a")
+        f=open(path, "a")
 #         buf=str(0.0)+","+str(0.0)+"\n"
 #         with open(path, mode="a") as f:
 #             f.write(buf)
-         f.close()
+        f.close()
 
-    listener()
+    rospy.spin()
+
+if __name__=="__main__":
+    try:
+        listener()
+    except rospy.ROSInterruptException: pass

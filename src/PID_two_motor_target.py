@@ -3,7 +3,7 @@
 
 from std_msgs.msg import Float32
 import rospy
-import target_getter
+import Two_target_calc
 
 _base_speed=0.25        #[Km/h]　→　[m/s]
 _Wheel_radius=0.08      #[m]
@@ -15,26 +15,25 @@ def Target_pub():
     pub_left=rospy.Publisher("Left_wheel_target_update", Float32, queue_size=10)
 
     while not rospy.is_shutdown():
-        Turning_direction=raw_input("\nTurning direction( r or l) >> ")
+        Turning_direction=raw_input("\nTurning direction( r or l  q:exit) >> ")
         if Turning_direction=="q":
             print("\n")
             print(" --------------------------------- ")
-            print("|             Finish!             |")
-            print(" --------------------------------- cd")
+            print("|             Finish              |")
+            print(" --------------------------------- ")
             print("\n")
 
             break;
         Turning_radius=float(raw_input("Turning radius >> "))
         print("")
 
-        get=target_getter.target_getter(Turning_radius, Turning_direction, _base_speed, _Wheel_radius, _Wheel_separation)
+        get=Two_target_calc.target_getter(Turning_radius, Turning_direction, _base_speed, _Wheel_radius, _Wheel_separation)
         RwT.data=get.VR_RPM()
         LwT.data=get.VL_RPM()
-
         pub_right.publish(RwT)
         pub_left.publish(LwT)
 
-
+        rospy.loginfo("Right: %frpm  Left: %frpm", RwT.data,LwT.data)
 
 if __name__=="__main__":
     RwT=Float32()

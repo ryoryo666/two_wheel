@@ -7,23 +7,27 @@
   <node name="Two_motor_target_Publisher" pkg="two_wheel" type="PID_two_motor_target.py" output="screen"/>
 
 <!--Right Wheel-->
-  <node name="PID_Right_wheel_output_plotter" pkg="two_wheel" type="PID_csv_outputter_right.py">
-    <param name="csv_path" value="$(find two_wheel)/csv/$(arg Right_name)"/>
-    <remap from="/rpm_data" to="/Right_wheel_rpm_data"/>
-  </node>
+  <group ns="Right_wheel">
+    <node name="csv_output" pkg="two_wheel" type="csv_outputter.py">
+      <param name="csv_path" value="$(find two_wheel)/csv/$(arg Right_name)"/>
+      <remap from="/rpm_data" to="/Right_wheel_rpm_data"/>
+    </node>
 
-  <node name="Right_Arduino_node" pkg="rosserial_python" type="serial_node.py">
-    <param name="port" value="/dev/ttyS2"/>
-  </node>
+    <node name="Arduino_node" pkg="rosserial_python" type="serial_node.py">
+      <param name="port" value="/dev/ttyS2"/>
+    </node>
+  </group>
 
 <!-- Left Wheel -->
-  <node name="PID_Left_wheel_output_plotter" pkg="two_wheel" type="PID_csv_outputter_left.py">
-    <param name="csv_path" value="$(find two_wheel)/csv/$(arg Left_name)"/>
-    <remap from="/rpm_data" to="/Left_wheel_rpm_data"/>
-  </node>
+  <group ns="Left_wheel">
+    <node name="csv_output" pkg="two_wheel" type="csv_outputter.py">
+      <param name="csv_path" value="$(find two_wheel)/csv/$(arg Left_name)"/>
+      <remap from="/rpm_data" to="/Left_wheel_rpm_data"/>
+    </node>
 
-  <node name="Left_Arduino_node" pkg="rosserial_python" type="serial_node.py">
-    <param name="port" value="/dev/ttyS1"/>
-  </node>
+    <node name="Arduino_node" pkg="rosserial_python" type="serial_node.py">
+      <param name="port" value="/dev/ttyS1"/>
+    </node>
+  </group>
 
 </launch>
