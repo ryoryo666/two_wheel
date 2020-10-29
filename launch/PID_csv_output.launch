@@ -3,11 +3,11 @@
 
   <arg name="Name" default="data.csv"/>
 
-  <node name="PID_output_plotter" pkg="two_wheel" type="PID_csv_outputter.py" output="screen">
+  <node name="PID_output_plotter" pkg="two_wheel" type="csv_outputter.py">
     <param name="csv_path" value="$(find two_wheel)/csv/$(arg Name)"/>]
   </node>
   <node name="Arduino_node" pkg="rosserial_python" type="serial_node.py">
-    <param name="port" value="/dev/ttyS1"/>
+    <param name="port" value="/dev/ttyACM0"/>
   </node>
 
 

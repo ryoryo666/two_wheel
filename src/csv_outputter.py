@@ -14,25 +14,21 @@ def callback(msg):
 
     rospy.loginfo("value: %f  time: %f", r_value,r_time)
 
-    buf=str(r_time)+","+str(r_value)+"\n"
-    with open(r_path, mode="a") as f:
+    buf=str(r_time)+","+str(r_value)+","+str(l_time)+","+str(l_value)+"\n"
+    with open(path, mode="a") as f:
         f.write(buf)
 
 def listener():
-    rospy.init_node("PID_getter_", anonymous=False)
     rospy.Subscriber("/rpm_data", PID, callback)
-    r_path=rospy.get_param('~csv_path')
 
-    if  not os.path.isfile(path):
-        f=open(path, "a")
-#         buf=str(0.0)+","+str(0.0)+"\n"
-#         with open(path, mode="a") as f:
-#             f.write(buf)
-        f.close()
+    with open(path, mode="w") as f:
+        print("New\n")
 
     rospy.spin()
 
 if __name__=="__main__":
     try:
+        rospy.init_node("PID_getter_", anonymous=False)
+        path=rospy.get_param('~csv_path')
         listener()
     except rospy.ROSInterruptException: pass
