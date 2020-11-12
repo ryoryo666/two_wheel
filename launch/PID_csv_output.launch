@@ -1,11 +1,14 @@
 <?xml version="1.0"?>
 <launch>
 
-  <arg name="Name" default="data.csv"/>
+  <arg name="Name_R" default="rpm-R.csv"/>
+  <arg name="Name_L" default="rpm-L.csv"/>
 
-  <node name="PID_output_plotter" pkg="two_wheel" type="csv_outputter.py">
-    <param name="csv_path" value="$(find two_wheel)/csv/$(arg Name)"/>]
+  <node name="PID_output_plotter" pkg="two_wheel" type="csv_outputter.py" output="screen">
+    <param name="csv_path_r" value="$(find two_wheel)/csv/$(arg Name_R)"/>
+    <param name="csv_path_l" value="$(find two_wheel)/csv/$(arg Name_L)"/>
   </node>
+
   <node name="Arduino_node" pkg="rosserial_python" type="serial_node.py">
     <param name="port" value="/dev/ttyACM0"/>
   </node>

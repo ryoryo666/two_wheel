@@ -7,28 +7,32 @@ import os
 
 def callback(msg):
     global value,path
-    r_value=msg.r_data
-    r_time=msg.r_time/1000000
-    l_value=msg.l_data
-    l_time=msg.l_time/1000000
+    r_value=msg.r_data*60/(2*3.14)
+    l_value=msg.l_data*60/(2*3.14)
+    r_time=msg.r_time/10**6
+    l_time=msg.l_time/10**6
 
-    rospy.loginfo("value: %f  time: %f", r_value,r_time)
+    print "Right:{0}[rpm]    Left:{1}". format(r_value,l_value)
 
-    buf=str(r_time)+","+str(r_value)+","+str(l_time)+","+str(l_value)+"\n"
-    with open(path, mode="a") as f:
-        f.write(buf)
+    buf_r=str(r_time)+","+str(r_value)+"\n"
+    buf_l=str(l_time)+","+str(l_value)+"\n"
+    with open(path_r, mode="a") as e:
+        e.write(buf_r)
+    with open(path_l, mode="a") as f:
+        f.write(buf_l)
 
 def listener():
+    rospy.init_node("PID_getter_", anonymous=False)
     rospy.Subscriber("/rpm_data", PID, callback)
 
-    with open(path, mode="w") as f:
-        print("New\n")
+    path_r=rospy.get_param('~csv_path_r')
+    path_l=rospy.get_param('~csv_path_l')
+    with open(path_r, mode="w")
+    with open(path_l, mode="w")
 
     rospy.spin()
 
 if __name__=="__main__":
     try:
-        rospy.init_node("PID_getter_", anonymous=False)
-        path=rospy.get_param('~csv_path')
         listener()
     except rospy.ROSInterruptException: pass
