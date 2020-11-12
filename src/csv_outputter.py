@@ -27,8 +27,10 @@ def listener():
 
     path_r=rospy.get_param('~csv_path_r')
     path_l=rospy.get_param('~csv_path_l')
-    with open(path_r, mode="w")
-    with open(path_l, mode="w")
+    with open(path_r, mode="w"):
+        print "New rpm data"
+    with open(path_l, mode="w"):
+        print ""
 
     rospy.spin()
 
