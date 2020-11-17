@@ -7,7 +7,7 @@ import math
 from two_wheel.msg import target_curve
 
 def Target_Pub():
-    rospy.init_node("Target_Curve_Publisher", anonymous=True)
+    rospy.init_node("TargetSpeedCurve_Publisher", anonymous=True)
     pub=rospy.Publisher("target_update", target_curve, queue_size=10)
     r=rospy.Rate(2)
 
