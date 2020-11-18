@@ -9,10 +9,10 @@ from two_wheel.msg import target_curve
 def Target_Pub():
     rospy.init_node("TargetSpeedCurve_Publisher", anonymous=True)
     pub=rospy.Publisher("target_update", target_curve, queue_size=10)
-    r=rospy.Rate(2)
+    r=rospy.Rate(50)
 
     target_list=[]
-    step=10
+    step=100
     last_target=0.0
     data=target_curve()
 
@@ -32,7 +32,7 @@ def Target_Pub():
 		data.r_target=(target-last_target)*math.sin(n*(math.pi/2))+last_target
 		data.l_target=data.r_target
 		pub.publish(data)
-		print(data)
+		print "R:{0}	L:{1}". format(data.r_target,data.l_target)
 		r.sleep()
 
 
