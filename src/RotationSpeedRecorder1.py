@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import rospy
-from two_wheel.msg import PID
+from two_wheel.msg import RPM1_Time
 import os
 
-path=rospy.get_param("/PID_Right_wheel_output_plotter/csv_path")
+path=rospy.get_param('~csv_path')
 
 def callback(msg):
     global value
@@ -19,8 +19,8 @@ def callback(msg):
         f.write(buf)
 
 def listener():
-    rospy.init_node("PID_getter_right", anonymous=False)
-    rospy.Subscriber("/rpm_data", PID, callback)
+    rospy.init_node("Rotation_Speed_Recorder", anonymous=False)
+    rospy.Subscriber("/rpm_data", RPM1_Time, callback)
     rospy.spin()
 
 if __name__=="__main__":

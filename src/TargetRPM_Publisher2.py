@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
+#   Use two Arduino and, two motor and motor driver ver
+
 from std_msgs.msg import Float32
 import rospy
 import Two_target_calc

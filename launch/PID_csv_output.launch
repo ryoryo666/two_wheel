@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <launch>
 
-  <arg name="Name_R" default="rpm-R.csv"/>
-  <arg name="Name_L" default="rpm-L.csv"/>
+  <arg name="Name_R" default="R-rpm.csv"/>
+  <arg name="Name_L" default="L-rpm.csv"/>
 
-  <node name="PID_output_plotter" pkg="two_wheel" type="csv_outputter.py" output="screen">
+  <node name="Rotation_Speed_Recorder" pkg="two_wheel" type="RotationSpeedRecorder2.py" output="screen">
     <param name="csv_path_r" value="$(find two_wheel)/csv/$(arg Name_R)"/>
     <param name="csv_path_l" value="$(find two_wheel)/csv/$(arg Name_L)"/>
   </node>
