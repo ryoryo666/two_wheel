@@ -3,7 +3,6 @@
 
 import rospy
 import math
-
 from two_wheel.msg import target_curve
 
 def Target_Pub():
@@ -11,7 +10,6 @@ def Target_Pub():
     pub=rospy.Publisher("target_update", target_curve, queue_size=10)
     r=rospy.Rate(50)
 
-    target_list=[]
     step=100
     last_target=0.0
     data=target_curve()
@@ -21,25 +19,26 @@ def Target_Pub():
     Ws=0.08	#Wheel separation
 
     while not rospy.is_shutdown():
-	target=float(raw_input("Target(Stop:000) >>"))
-	if target==000:
-	    print("Stop")
-	    break;
+        target=raw_input("Target(Stop:q) >>")
+        if target=="q":
+            data.r_target=0.0
+            data.l_target=0.0
+            pub.publish(data)
+            print("Stop")
+            break;
 
+        target=float(target)
+        for i in range(step):
+		    n=float(i+1.0)/step
+		    data.r_target=(target-last_target)*math.sin(n*(math.pi/2))+last_target
+		    data.l_target=data.r_target
+		    pub.publish(data)
+		    print "R:{0}	L:{1}". format(data.r_target,data.l_target)
+		    r.sleep()
 
-	for i in range(step):
-		n=float(i+1.0)/step
-		data.r_target=(target-last_target)*math.sin(n*(math.pi/2))+last_target
-		data.l_target=data.r_target
-		pub.publish(data)
-		print "R:{0}	L:{1}". format(data.r_target,data.l_target)
-		r.sleep()
-
-
-	last_target=target
-	del target_list[:]
+        last_target=target
 
 if __name__=="__main__":
     try:
-	Target_Pub()
+        Target_Pub()
     except rospy.ROSInterruptException: pass
