@@ -8,15 +8,18 @@ file_list_1=glob.glob(os.path.join("", "R*"))
 file_list_2=glob.glob(os.path.join("", "L*"))
 
 file_list_1.sort()
-for i in range(len(file_list_1)):
-	print str(i)+": "+file_list_1[i]
-number1=int(raw_input("File Number1>> "))
+#for i in range(len(file_list_1)):
+#	print str(i)+": "+file_list_1[i]
+#number1=int(raw_input("File Number1>> "))
+number1=0
 data1=np.loadtxt(fname=file_list_1[number1], delimiter = ",")
 print ""
+
 file_list_2.sort()
-for i in range(len(file_list_2)):
-	print str(i)+": "+file_list_2[i]
-number2=int(raw_input("File Number2>> "))
+#for i in range(len(file_list_2)):
+#	print str(i)+": "+file_list_2[i]
+#number2=int(raw_input("File Number2>> "))
+number2=0
 data2=np.loadtxt(fname=file_list_2[number2], delimiter = ",")
 
 x1=data1[:,0]

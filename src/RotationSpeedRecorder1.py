@@ -25,10 +25,7 @@ def listener():
 
 if __name__=="__main__":
     if  not os.path.isfile(path):
-         f=open(path, "a")
-#         buf=str(0.0)+","+str(0.0)+"\n"
-#         with open(path, mode="a") as f:
-#             f.write(buf)
+         f=open(path, "w")
          f.close()
 
     listener()
