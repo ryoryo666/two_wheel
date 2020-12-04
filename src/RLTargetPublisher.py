@@ -21,7 +21,7 @@ def New_cmd(msg):
 
 def set():
     rospy.init_node("RL_Target_Publisher", anonymous=False)
-    rospy.Subscriber("a", Twist, New_cmd)
+    rospy.Subscriber("/cmd_vel", Twist, New_cmd)
     rospy.spin()
 
 if __name__=="__main__":
