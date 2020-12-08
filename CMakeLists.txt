@@ -52,9 +52,10 @@ find_package(catkin REQUIRED COMPONENTS
  add_message_files(
    FILES
    curve_data.msg
+   RPM1_Time.msg
    RPM2_Time.msg
    target_curve.msg
-   RPM1_Time.msg
+   RL_RPM.msg
  )
 
 ## Generate services in the 'srv' folder

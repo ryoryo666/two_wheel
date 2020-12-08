@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="filename" default="Real_Trajectory.csv"/>
+    <arg name="filename" default="RealTrajectory.csv"/>
 
     <node name="Localization" pkg="two_wheel" type="Odometry.py"/>
     <node name="NewCmdPublisher" pkg="two_wheel" type="RLTargetPublisher.py"/>

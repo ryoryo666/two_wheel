@@ -9,8 +9,8 @@ for i in range(len(file_list)):
 number=int(raw_input("\nPlot File Number>> "))
 data=np.loadtxt(fname=file_list[number], delimiter = ",")
 #x:0 y:1 theta:2 v:3 w:4 time:5
-x=data[:,0]
-y=data[:,1]
+x=data[:,1]
+y=data[:,2]
 
 
 plt.plot(x,y,color="red")
@@ -20,9 +20,9 @@ plt.xlabel("Time[s]", fontsize=18)
 plt.ylabel("[rpm]", fontsize=18)
 
 # x/y Axis Limit
-#lim=10
-#plt.xlim(-1*lim,lim)
-#plt.ylim(-1*lim,lim)
+lim=1
+plt.xlim(-1*lim,lim)
+plt.ylim(-1*lim,lim)
 #plt.ylim(-0.1,0.1)
 
 # Position Adjustment

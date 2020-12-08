@@ -21,6 +21,7 @@ def odom(msg):
 	R_data = msg.r_data
 	L_data = msg.l_data
 	dt = msg.time - last_time
+	
 	vr = round(R_data,1)*((2*math.pi)/60.0) * wr 
 	vl = round(L_data,1)*((2*math.pi)/60.0) * wr 
 	w = (vr-vl)/(2*d)

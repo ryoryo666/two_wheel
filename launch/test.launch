@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="filename" default="RealTrajectory.csv"/>
+
+  <node name="Arduino_node" pkg="rosserial_python" type="serial_node.py">
+    <param name="port" value="/dev/ttyACM0"/>
+    <!--<param name="baud" value="115200"/> -->
+  </node>
+
+  <node name="Odometry" pkg="two_wheel" type="Odometry.py" output="screen"/>
+  <node name="TrajectoryRecorder" pkg="two_wheel" type="TrajectoryRecorder.py">
+        <param name="csv_path" value="$(find two_wheel)/csv/$(arg filename)"/>
+  </node>
+
+
+</launch>

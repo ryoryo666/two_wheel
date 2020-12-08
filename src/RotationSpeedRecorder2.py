@@ -30,9 +30,9 @@ def listener():
     rospy.Subscriber("/rpm_data", RPM2_Time, callback)
 
     with open(path_r, mode="w"):
-        print "Record Start"
-    with open(path_l, mode="w"):
         print ""
+    with open(path_l, mode="w"):
+        print "Record Start"
 
     rospy.spin()
 
