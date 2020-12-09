@@ -13,7 +13,7 @@ x=data[:,1]
 y=data[:,2]
 
 
-plt.plot(x,y,color="red")
+plt.plot(x,y,color="red", label="RealMobileTrajectory")
 
 # Label Name
 plt.xlabel("Time[s]", fontsize=18)

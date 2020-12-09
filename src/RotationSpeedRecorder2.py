@@ -12,8 +12,8 @@ def callback(msg):
     global value,path_r,path_l,i
     r_value=msg.r_data#*60/(2*3.14)
     l_value=msg.l_data#*60/(2*3.14)
-    r_value=round(r_value,1)
-    l_value=round(l_value,1)
+    r_value=round(r_value,2)
+    l_value=round(l_value,2)
     r_time=msg.time
     l_time=msg.time
 
