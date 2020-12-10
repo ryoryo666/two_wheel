@@ -5,10 +5,9 @@ import rospy
 from two_wheel.msg import RPM1_Time
 import os
 
-path=rospy.get_param('~csv_path')
 
 def callback(msg):
-    global value
+    global value,path
     value=msg.data
     time=msg.time/1000000
 
@@ -19,13 +18,15 @@ def callback(msg):
         f.write(buf)
 
 def listener():
-    rospy.init_node("Rotation_Speed_Recorder", anonymous=False)
+    path=rospy.get_param('~csv_path')
+    with open(path, mode="w"):
+        print "Record Start"
     rospy.Subscriber("/rpm_data", RPM1_Time, callback)
     rospy.spin()
 
 if __name__=="__main__":
-    if  not os.path.isfile(path):
-         f=open(path, "w")
-         f.close()
-
-    listener()
+    try:
+        rospy.init_node("Rotation_Speed_Recorder", anonymous=False)
+        path=rospy.get_param('~csv_path')
+        listener()
+    except rospy.ROSInterruptException: pass

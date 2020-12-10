@@ -1,4 +1,6 @@
 <?xml version="1.0"?>
+<!-- 2つのArduinoと2つのモーターを使用 -->
+<!-- 回転半径Rのカーブを走行時の左右モーターの速度制御 -->
 <launch>
 
   <arg name="Right_name" default="R-rpm.csv"/>
@@ -26,7 +28,7 @@
     </node>
 
     <node name="Arduino_node" pkg="rosserial_python" type="serial_node.py">
-      <param name="port" value="/dev/ttyACM0"/>
+      <param name="port" value="/dev/ttyACM1"/>
     </node>
   </group>
 

@@ -1,18 +1,17 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="filename" default="RealTrajectory.csv"/>
-
-    <node name="Localization" pkg="two_wheel" type="Odometry.py"/>
-    <node name="NewCmdPublisher" pkg="two_wheel" type="RLTargetPublisher.py"/>
     
     <node name="Arduino_node" pkg="rosserial_python" type="serial_node.py">
         <param name="port" value="/dev/ttyACM0"/>
     </node>
     
-    <node name="TrajectoryRecorder" pkg="gazebo_sim" type="TrajectoryRecorder.py">
+    <node name="Localization" pkg="two_wheel" type="Odometry.py"/>
+    <node name="TrajectoryRecorder" pkg="two_wheel" type="TrajectoryRecorder.py">
         <param name="csv_path" value="$(find two_wheel)/csv/$(arg filename)"/>
-        <remap from="/robot_gazebo/diff_drive_controller/odom" to="/Odometry"/>
     </node>
+
+    <node name="NewCmdPublisher" pkg="two_wheel" type="RLTargetPublisher.py"/>
     <node name="Controler" pkg="gazebo_sim" type="TrajectoryTrackingControler.py" output="screen">
         <remap from="/robot_gazebo/diff_drive_controller/odom" to="/Odometry"/>
         <remap from="/robot_gazebo/diff_drive_controller/cmd_vel" to="/cmd_vel"/>

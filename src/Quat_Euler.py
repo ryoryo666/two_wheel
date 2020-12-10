@@ -1,4 +1,3 @@
-
 import tf
 
 class Quat_TF(object):
