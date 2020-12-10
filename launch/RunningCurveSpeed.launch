@@ -6,7 +6,7 @@
   <arg name="Right_name" default="R-rpm.csv"/>
   <arg name="Left_name" default="L-rpm.csv"/>
 
-  <node name="Two_motor_target_Publisher" pkg="two_wheel" type="TargetRPM_Publisher2.py" output="screen"/>
+  <node name="Two_motor_target_Publisher" pkg="two_wheel" type="TargetRPM_Publisher.py" output="screen"/>
 
 <!--Right Wheel-->
   <group ns="Right_wheel">
