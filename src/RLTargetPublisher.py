@@ -13,10 +13,10 @@ def New_cmd(msg):
     v=msg.linear.x  # Translation Speed [m/s]
     w=msg.angular.z # Angular velocity
 
-    target.r_target = (v/Rw)+((T*w)/(2*Rw)) # [rad / s]
-    target.l_target = (v/Rw)-((T*w)/(2*Rw)) # [rad / s]
-#    target.r_target = (v/Rw)+((T*w)/(2*Rw))/(2*math.pi)*60 # [rpm]
-#    target.l_target = (v/Rw)-((T*w)/(2*Rw))/(2*math.pi)*60 # [rpm]
+#    target.r_target = (v/Rw)+((T*w)/(2*Rw)) #[rad / s]
+#    target.l_target = (v/Rw)-((T*w)/(2*Rw)) #[rad / s]
+    target.r_target = (v/Rw)+((T*w)/(2*Rw))/(2*math.pi)*60 #[rpm]
+    target.l_target = (v/Rw)-((T*w)/(2*Rw))/(2*math.pi)*60 #[rpm]
     pub.publish(target)
 
 def set():
