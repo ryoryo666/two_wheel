@@ -40,7 +40,7 @@ if __name__=="__main__":
         rospy.init_node("Trajectory_Recorder", anonymous=False)
         rospack=rospkg.RosPack()
         df_path=rospack.get_path("gazebo_sim")
-        path=rospy.get_param('~csv_path',df_path+"/csv")
+        path=rospy.get_param('~csv_path',df_path+"/csv/RealTrajectory.csv")
         time=0.0
         
         with open(path, mode="w") as f:

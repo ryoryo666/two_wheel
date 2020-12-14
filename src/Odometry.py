@@ -12,7 +12,7 @@ dt = 0.0
 last_time=0.0
 
 last_x=0.0
-last_y=0.1
+last_y=0.2
 last_th=0.0
 last_time=0.0
 
@@ -31,6 +31,8 @@ def odom(msg):
 	dth = w *dt
 	dL = (dL_r + dL_l)/2
 	
+	Odom.header.stamp.nsecs, Odom.header.stamp.secs = math.modf(msg.time)
+	Odom.header.stamp.nsecs = Odom.header.stamp.nsecs *10**9
 
 	if dth < 0.000001 or dth==0.0 :
 		Odom.pose.pose.position.x = last_x + dL * math.cos(last_th+(dth/2))

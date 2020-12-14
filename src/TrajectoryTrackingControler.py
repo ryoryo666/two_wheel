@@ -16,9 +16,9 @@ import Quat_Euler
 #kth=0.05
 
 #Euler
-kx=30.0
-ky=15.0
-kth=0.5
+kx=50.0
+ky=10.0
+kth=1.0
 
 num=0
 new_twist=Twist()
@@ -33,7 +33,7 @@ def New_cmd(odom_msg):
 	x_diff=Target_Trajectory[num][1]-x_p
 	y_diff=Target_Trajectory[num][2]-y_p
 
-	if math.sqrt((x_diff**2)+(x_diff**2)) < 0.05:
+	if math.sqrt((x_diff**2)+(x_diff**2)) < 0.2:
 		num+=1
 		if num >= stop:
 			print "\nFinish\n"

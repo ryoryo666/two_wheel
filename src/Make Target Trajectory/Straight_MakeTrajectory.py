@@ -17,10 +17,10 @@ v=0.0
 w=0.0
 
 max=1.0
-step=20
+step=200
 for i in range(step+1):
-    x = max / step *i
-    v = 0.5
+    x = max / step * i
+    v = 0.05
 
     buf=str(t)+","+str(x)+","+str(y)+","+str(th)+","+str(v)+","+str(w)+"\n"
     with open(path, mode="a") as f:
