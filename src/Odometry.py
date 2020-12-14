@@ -12,7 +12,7 @@ dt = 0.0
 last_time=0.0
 
 last_x=0.0
-last_y=0.0
+last_y=0.1
 last_th=0.0
 last_time=0.0
 
@@ -33,16 +33,16 @@ def odom(msg):
 	
 
 	if dth < 0.000001 or dth==0.0 :
-		Odom.pose.pose.position.x = round(last_x + dL * math.cos(last_th+(dth/2)),3)
-		Odom.pose.pose.position.y = round(last_y + dL * math.sin(last_th+(dth/2)),3)
+		Odom.pose.pose.position.x = last_x + dL * math.cos(last_th+(dth/2))
+		Odom.pose.pose.position.y = last_y + dL * math.sin(last_th+(dth/2))
 
 	else :
 		p = dL/dth
 		dL1 = 2*p*math.sin(dth/2)
-		Odom.pose.pose.position.x = round(last_x + dL1 * math.cos(last_th+(dth/2)),3)
-		Odom.pose.pose.position.y = round(last_y + dL1 * math.sin(last_th+(dth/2)),3)
+		Odom.pose.pose.position.x = last_x + dL1 * math.cos(last_th+(dth/2))
+		Odom.pose.pose.position.y = last_y + dL1 * math.sin(last_th+(dth/2))
 
-	Odom.pose.pose.orientation.z = round(last_th + dth,4)
+	Odom.pose.pose.orientation.z = last_th + dth
 	Odom.twist.twist.linear.x = (vr + vl)/2
 	Odom.twist.twist.angular.z = w
 	pub.publish(Odom)

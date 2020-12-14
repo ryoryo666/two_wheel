@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import rospy
+import rospy,rospkg
 from nav_msgs.msg import Odometry
 from two_wheel.msg import target_curve
 import os
@@ -38,9 +38,11 @@ def Set():
 if __name__=="__main__":
     try:
         rospy.init_node("Trajectory_Recorder", anonymous=False)
-        path=rospy.get_param('~csv_path','/home/ubuntu/catkin_ws/src/gazebo_sim/csv/TargetTrajectory.csv')
+        rospack=rospkg.RosPack()
+        df_path=rospack.get_path("gazebo_sim")
+        path=rospy.get_param('~csv_path',df_path+"/csv")
         time=0.0
-#        print(os.getcwd())
+        
         with open(path, mode="w") as f:
             print("New Trajectory")
         Set()
