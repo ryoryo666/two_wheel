@@ -12,7 +12,7 @@ number=int(raw_input("\nPlot File Number>> "))
 data=np.loadtxt(fname=file_list[number], delimiter = ",")
 
 x=data[:,1]
-y=data[:,2]
+y=data[:,4]
 
 #plt.plot(x,y,color="red", lw="1.0", label="RealMobileTrajectory")
 plt.scatter(x,y,color="red", lw="0.5")
@@ -25,8 +25,8 @@ plt.scatter(x,y,color="red", lw="0.5")
 
 # x/y Axis Limit
 lim=1.1
-plt.xlim(-1*lim,lim)
-plt.ylim(-1*lim,lim)
+plt.xlim(-0.1*lim,lim)
+plt.ylim(-0.1*lim,lim)
 
 # Position Adjustment
 plt.subplots_adjust(bottom=0.15)

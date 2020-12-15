@@ -38,8 +38,8 @@ ax.set_ylabel("Y[m]", fontsize=18)
 
 # x and y Axis Limit
 lim=1.1
-ax.set_xlim(-1*lim,lim)
-ax.set_ylim(-1*lim,lim)
+ax.set_xlim(-0.1*lim,lim)
+ax.set_ylim(-0.1*lim,lim)
 
 # Position Adjustment
 plt.subplots_adjust(bottom=0.15)

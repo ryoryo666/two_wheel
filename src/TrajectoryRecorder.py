@@ -15,7 +15,7 @@ def Recorder(odom_msg):
     theta_ref=q.Euler_z()
     v_ref=odom_msg.twist.twist.linear.x
     w_ref=odom_msg.twist.twist.angular.z
-    time=odom_msg.header.stamp.secs+(odom_msg.header.stamp.nsecs*(10**-9))
+    time=odom_msg.header.stamp.secs+(odom_msg.header.stamp.nsecs*(10.0**-9))
     print "Odometry:x={0}   y={1}   θ={2}". format(x_ref, y_ref, theta_ref)
 
     buf=str(time)+","+str(x_ref)+","+str(y_ref)+","+str(theta_ref)+","+str(v_ref)+","+str(w_ref)+"\n"

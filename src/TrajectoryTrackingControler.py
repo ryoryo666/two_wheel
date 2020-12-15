@@ -17,7 +17,7 @@ import Quat_Euler
 
 #Euler
 kx=50.0
-ky=10.0
+ky=20.0
 kth=1.0
 
 num=0
@@ -33,7 +33,7 @@ def New_cmd(odom_msg):
 	x_diff=Target_Trajectory[num][1]-x_p
 	y_diff=Target_Trajectory[num][2]-y_p
 
-	if math.sqrt((x_diff**2)+(x_diff**2)) < 0.2:
+	if math.sqrt((x_diff**2)+(x_diff**2)) < 0.1:
 		num+=1
 		if num >= stop:
 			print "\nFinish\n"
@@ -73,7 +73,7 @@ if __name__=="__main__":
 		pack=rospack.get_path("two_wheel")
 		file_list=glob.glob(os.path.join(pack+"/csv", "Target*"))
 		file_list.sort()
-		print "\n"
+		print ""
 		for i in range(len(file_list)):
 			print str(i)+":"+file_list[i].replace(pack+"/csv/", "")
 		number=int(raw_input("\nFileNumber>> "))
