@@ -57,8 +57,8 @@ if __name__=="__main__":
 		Odom=Odometry()
 
 		last_x = 0.0
-		last_y = 0.0
-		last_th = math.pi/4.0
+		last_y = 0.2
+		last_th = 0.0
 		start_Time = rospy.Time.now()
 		last_Time = start_Time
 

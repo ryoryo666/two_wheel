@@ -28,9 +28,10 @@ y1=data1[:,2]
 x2=data2[:,1]
 y2=data2[:,2]
 
-ax.plot(x1,y1,color="green", label=file_list_M[number1].replace(".csv",""))
-ax.scatter(x2,y2,color="red",alpha=0.6, s=5, label=file_list_T[number2].replace(".csv",""))
-#ax.scatter(x2,y2, color="red", s=1.0, label=file_list_T[number2].replace(".csv",""))
+Mobile_label = file_list_M[number1].replace(".csv","")
+Target_label = "Solution"#file_list_T[number2].replace(".csv","")
+ax.plot(x1,y1,color="green", label=Mobile_label)
+ax.scatter(x2,y2,color="red", label=Target_label,alpha=0.6, s=5)
 
 # Label Name
 ax.set_xlabel("X[m]", fontsize=18)

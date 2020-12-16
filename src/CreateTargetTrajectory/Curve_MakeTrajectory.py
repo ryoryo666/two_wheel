@@ -6,7 +6,7 @@ import math
 c_path=os.path.dirname(os.path.abspath(__file__))
 path=c_path+'/../../csv/TargetTrajectory_Curve.csv'
 with open(path, mode="w") as f:
-    print("Create New Trajectory")
+    print("\nCreate New Trajectory\n")
 
 t=0.0
 x=0.0
