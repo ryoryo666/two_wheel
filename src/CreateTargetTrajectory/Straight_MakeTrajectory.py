@@ -16,7 +16,7 @@ last_th=0.0
 v=0.0
 w=0.0
 
-max=0.6
+max=1.0
 step=360
 for i in range(step+1):
     x = max / step * i
