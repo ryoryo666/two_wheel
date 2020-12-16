@@ -11,8 +11,7 @@ def Recorder(odom_msg):
     global time
     x_ref=odom_msg.pose.pose.position.x
     y_ref=odom_msg.pose.pose.position.y
-    q=Quat_Euler.Quat_TF(0,0, odom_msg.pose.pose.orientation.z, odom_msg.pose.pose.orientation.w)
-    theta_ref=q.Euler_z()
+    theta_ref=odom_msg.pose.pose.orientation.z
     v_ref=odom_msg.twist.twist.linear.x
     w_ref=odom_msg.twist.twist.angular.z
     time=odom_msg.header.stamp.secs+(odom_msg.header.stamp.nsecs*(10.0**-9))

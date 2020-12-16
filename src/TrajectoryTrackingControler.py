@@ -8,17 +8,11 @@ import numpy as np
 import glob,os
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
-import Quat_Euler
-
-#Quat
-#kx=0.05
-#ky=0.07
-#kth=0.05
 
 #Euler
-kx=50.0
-ky=20.0
-kth=1.0
+kx=40.0
+ky=80.0
+kth=20.0
 
 num=0
 new_twist=Twist()
@@ -32,15 +26,19 @@ def New_cmd(odom_msg):
 
 	x_diff=Target_Trajectory[num][1]-x_p
 	y_diff=Target_Trajectory[num][2]-y_p
+	diff = math.sqrt((x_diff**2)+(y_diff**2))
 
-	if math.sqrt((x_diff**2)+(x_diff**2)) < 0.1:
-		num+=1
-		if num >= stop:
-			print "\nFinish\n"
-			new_twist.linear.x  = 0.0
-			new_twist.angular.z = 0.0
-			pub.publish(new_twist)
-			rospy.signal_shutdown("Finish")
+	if diff < 0.2:
+		num += 1
+		if diff < 0.1:
+			num += 1
+			if diff < 0.05:
+				num += 2
+				if diff < 0.01:
+					num += 2
+	
+	shutdown()
+
 	print "Target"
 	print "x:{0}	y:{1}".format(Target_Trajectory[num][1],Target_Trajectory[num][2])
 
@@ -65,6 +63,14 @@ def Set():
 	rospy.Subscriber("/Odometry", Odometry, New_cmd)
 	rospy.spin()
 
+def shutdown():
+	global num,stop
+	if num >= stop:
+			print "\nFinish\n"
+			new_twist.linear.x  = 0.0
+			new_twist.angular.z = 0.0
+			pub.publish(new_twist)
+			rospy.signal_shutdown("Finish")
 
 if __name__=="__main__":
     try:

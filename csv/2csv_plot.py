@@ -13,7 +13,7 @@ for i in range(len(file_list_M)):
 	print str(i)+": "+file_list_M[i].replace(c_path+"/", "")
 number1=int(raw_input("File Number1>> "))
 data1=np.loadtxt(fname=file_list_M[number1], delimiter = ",")
-file_list_M[i] = file_list_M[i].replace(c_path+"/", "")
+file_list_M[number1] = file_list_M[number1].replace(c_path+"/", "")
 
 print ""
 file_list_T.sort()
@@ -21,7 +21,7 @@ for i in range(len(file_list_T)):
 	print str(i)+": "+file_list_T[i].replace(c_path+"/", "")
 number2=int(raw_input("File Number2>> "))
 data2=np.loadtxt(fname=file_list_T[number2], delimiter = ",")
-file_list_T[i] = file_list_T[i].replace(c_path+"/", "")
+file_list_T[number2] = file_list_T[number2].replace(c_path+"/", "")
 
 x1=data1[:,1]
 y1=data1[:,2]

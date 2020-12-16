@@ -10,7 +10,7 @@ wr = 0.03825	# Wheel Radius [m]
 d  = 0.00615	# Wheel-Center distance [m]
 
 def odom(msg):
-	global last_x,last_y,last_th,last_time
+	global last_x,last_y,last_th,last_Time,now_Time
 	R_data = msg.r_data
 	L_data = msg.l_data
 	now_Time = rospy.Time.now()
@@ -26,10 +26,11 @@ def odom(msg):
 	dth = w *dt
 	dL = (dL_r + dL_l)/2
 
-	Odom.header.stamp.secs = now_time.secs - start_Time.secs
-	Odom.header.stamp.nsecs = now_time.nsecs - start_Time.nsecs
+	diff_Time = now_Time - start_Time
+	Odom.header.stamp.secs = diff_Time.secs
+	Odom.header.stamp.nsecs = diff_Time.nsecs
 
-	if dth < 0.000001 or dth==0.0 :
+	if abs(dth) < 0.01 or dth==0.0 :
 		Odom.pose.pose.position.x = last_x + dL * math.cos(last_th+(dth/2))
 		Odom.pose.pose.position.y = last_y + dL * math.sin(last_th+(dth/2))
 	else :
@@ -56,8 +57,8 @@ if __name__=="__main__":
 		Odom=Odometry()
 
 		last_x = 0.0
-		last_y = 0.2
-		last_th = 0.0
+		last_y = 0.0
+		last_th = math.pi/4.0
 		start_Time = rospy.Time.now()
 		last_Time = start_Time
 
