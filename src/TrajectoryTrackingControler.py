@@ -10,11 +10,11 @@ from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 
 #Euler
-kx = 50.0
-ky = 100.0
+kx = 40.0
+ky = 70.0
 kth = 10.0
 
-num = 0
+num = 1
 new_twist=Twist()
 
 def New_cmd(odom_msg):
@@ -28,10 +28,11 @@ def New_cmd(odom_msg):
 	y_diff=Target_Trajectory[num][2]-y_p
 	diff = math.sqrt((x_diff**2)+(y_diff**2))
 
-	if diff < 0.05:
-		num += 1
-	elif diff < 0.2 :
-		num += 2
+	num+=1
+#	if diff < 0.1:
+#		num += 1
+#	elif diff < 0.1 :
+#		num += 2
 	shutdown()
 
 	print "Target"

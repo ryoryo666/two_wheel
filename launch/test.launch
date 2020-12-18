@@ -7,7 +7,8 @@
     <!--<param name="baud" value="115200"/> -->
   </node>
 
-  <node name="Odometry" pkg="two_wheel" type="Odometry.py" output="screen"/>
+  <node name="Speed_Publisher" pkg="two_wheel" type="Speed_test.py"/>
+  <node name="Odometry" pkg="two_wheel" type="odom.py" output="screen"/>
   <node name="TrajectoryRecorder" pkg="two_wheel" type="TrajectoryRecorder.py">
         <param name="csv_path" value="$(find two_wheel)/csv/$(arg filename)"/>
   </node>
