@@ -24,8 +24,8 @@ def New_cmd(odom_msg):
 	y_p=odom_msg.pose.pose.position.y
 	theta_p=odom_msg.pose.pose.orientation.z
 
-	x_diff=Target_Trajectory[num][1]-x_p
-	y_diff=Target_Trajectory[num][2]-y_p
+	x_diff=Reference_Path[num][1]-x_p
+	y_diff=Reference_Path[num][2]-y_p
 	diff = math.sqrt((x_diff**2)+(y_diff**2))
 
 	num+=1
@@ -35,15 +35,15 @@ def New_cmd(odom_msg):
 #		num += 2
 	shutdown()
 
-	print "Target"
-	print "x:{0}	y:{1}".format(Target_Trajectory[num][1],Target_Trajectory[num][2])
+	print "Reference"
+	print "x:{0}	y:{1}".format(Reference_Path[num][1],Reference_Path[num][2])
 
-	# Refference point on target trajectory
-	x_r=Target_Trajectory[num][1]
-	y_r=Target_Trajectory[num][2]
-	theta_r=Target_Trajectory[num][3]
-	v_r=Target_Trajectory[num][4]
-	w_r=Target_Trajectory[num][5]
+	# Reference point on target trajectory
+	x_r=Reference_Path[num][1]
+	y_r=Reference_Path[num][2]
+	theta_r=Reference_Path[num][3]
+	v_r=Reference_Path[num][4]
+	w_r=Reference_Path[num][5]
 
 	# Error value
 	x_err = (x_r-x_p)*math.cos(theta_p)+(y_r-y_p)*math.sin(theta_p)
@@ -73,14 +73,14 @@ if __name__=="__main__":
 		rospy.init_node("Kanayama_Method_Controller", disable_signals=True, anonymous=True)
 		rospack=rospkg.RosPack()
 		pack=rospack.get_path("two_wheel")
-		file_list=glob.glob(os.path.join(pack+"/csv", "Target*"))
+		file_list=glob.glob(os.path.join(pack+"/csv", "Reference*"))
 		file_list.sort()
 		print ""
 		for i in range(len(file_list)):
 			print str(i)+":"+file_list[i].replace(pack+"/csv/", "")
 		number=int(raw_input("\nFileNumber>> "))
-		Target_Trajectory=np.loadtxt(file_list[number], delimiter = ",")
-		stop=len(Target_Trajectory)
+		Reference_Path=np.loadtxt(file_list[number], delimiter = ",")
+		stop=len(Reference_Path)
 
 		pub=rospy.Publisher("/cmd_vel", Twist, queue_size=2)
 		Set()

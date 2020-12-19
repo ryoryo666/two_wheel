@@ -4,9 +4,9 @@ import os
 import math
 
 c_path=os.path.dirname(os.path.abspath(__file__))
-path=c_path+'/../../csv/TargetTrajectory_Straight.csv'
+path=c_path+'/../../csv/ReferencePath_Straight.csv'
 with open(path, mode="w") as f:
-    print("\nCreate New Curve Trajectory\n")
+    print("\nCreate New Curve Path\n")
 
 t = 0.0
 x = 0.0

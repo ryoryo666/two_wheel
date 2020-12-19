@@ -4,9 +4,9 @@ import os
 import math
 import HermiteCurve
 
-path='../../csv/TargetTrajectory_Hermite.csv'
+path='../../csv/ReferencePath_Hermite.csv'
 with open(path, mode="w") as f:
-    print("New Trajectory")
+    print("New Path")
 
 x_ref=[0,5]
 y_ref=[0,5]

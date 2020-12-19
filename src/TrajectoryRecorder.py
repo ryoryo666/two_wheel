@@ -3,12 +3,10 @@
 
 import rospy,rospkg
 from nav_msgs.msg import Odometry
-from two_wheel.msg import target_curve
+from two_wheel.msg import RightLeft_cmd_value
 import os
-import Quat_Euler
 
 def Recorder(odom_msg):
-    global time
     x_ref=odom_msg.pose.pose.position.x
     y_ref=odom_msg.pose.pose.position.y
     theta_ref=odom_msg.pose.pose.orientation.z
@@ -20,30 +18,29 @@ def Recorder(odom_msg):
     buf=str(time)+","+str(x_ref)+","+str(y_ref)+","+str(theta_ref)+","+str(v_ref)+","+str(w_ref)+"\n"
     with open(path, mode="a") as f:
         f.write(buf)
-    time+=0.01
+
 
 def Set():
-    Start_check = target_curve()
+    Start_check = RightLeft_cmd_value()
     while(1):
-        Start_check = rospy.wait_for_message("/target_update", target_curve)
+        Start_check = rospy.wait_for_message("/New_cmd", RightLeft_cmd_value)
         if not Start_check:
             continue
         break
-        print("Record Start")
+        print("Record Start\n")
 
     rospy.Subscriber("/Odometry", Odometry, Recorder)
     rospy.spin()
 
 if __name__=="__main__":
     try:
-        rospy.init_node("Trajectory_Recorder", anonymous=False)
+        rospy.init_node("Path_Recorder", anonymous=False)
         rospack=rospkg.RosPack()
-        df_path=rospack.get_path("gazebo_sim")
-        path=rospy.get_param('~csv_path',df_path+"/csv/RealTrajectory.csv")
-        time=0.0
-        
+        df_path=rospack.get_path("two_wheel")
+        path=rospy.get_param('~csv_path',df_path+"/csv/RealPath.csv")
         with open(path, mode="w") as f:
-            print("New Trajectory")
+            print("/nNew Path")
+
         Set()
 
     except rospy.ROSInterruptException: pass

@@ -55,7 +55,7 @@ find_package(catkin REQUIRED COMPONENTS
    curve_data.msg
    RPM1_Time.msg
    RPM2_Time.msg
-   target_curve.msg
+   RightLeft_cmd_value.msg
    RL_RPM.msg
  )
 

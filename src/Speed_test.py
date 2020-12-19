@@ -4,18 +4,18 @@
 import rospy
 import math
 from geometry_msgs.msg import Twist
-from two_wheel.msg import target_curve
+from two_wheel.msg import RightLeft_cmd_value
 
 def pub():
     rospy.init_node("Test_talker")
-    pub=rospy.Publisher("target_update", target_curve, queue_size=10)
-    target=target_curve()
-    target.r_target = 10.0
-    target.l_target = 10.0
+    pub=rospy.Publisher("New_cmd", RightLeft_cmd_value, queue_size=10)
+    ref_v=RightLeft_cmd_value()
+    ref_v.r_ref = 10.0
+    ref_v.l_ref = 10.0
     r=rospy.Rate(1)
 
     while not rospy.is_shutdown():
-        pub.publish(target)
+        pub.publish(ref_v)
         r.sleep()
 
 if __name__=="__main__":

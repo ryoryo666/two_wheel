@@ -6,7 +6,7 @@ fig, ax=plt.subplots()
 
 c_path=os.path.dirname(os.path.abspath(__file__))
 file_list_M=glob.glob(os.path.join(c_path, "Real*"))
-file_list_T=glob.glob(os.path.join(c_path, "Target*"))
+file_list_T=glob.glob(os.path.join(c_path, "ReferencePath*"))
 
 file_list_M.sort()
 for i in range(len(file_list_M)):
@@ -29,7 +29,8 @@ x2=data2[:,1]
 y2=data2[:,2]
 
 Mobile_label = file_list_M[number1].replace(".csv","")
-Target_label = "Solution"#file_list_T[number2].replace(".csv","")
+Target_label = "Reference Path"	#file_list_T[number2].replace(".csv","")
+
 ax.plot(x1,y1,color="green", label=Mobile_label)
 ax.scatter(x2,y2,color="red", label=Target_label,alpha=0.6, s=5)
 
