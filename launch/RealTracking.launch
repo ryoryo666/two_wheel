@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="filename" default="RealTrajectory.csv"/>
-    <arg name="Odometry_File" default="odom.py"/>
+    <arg name="filename" default="RealPath.csv"/>
+    <arg name="Odometry_File" default="Odometry1.py"/>
 
     <node name="Localization" pkg="two_wheel" type="$(arg Odometry_File)"/>
 
-    <node name="TrajectoryRecorder" pkg="two_wheel" type="TrajectoryRecorder.py">
+    <node name="TrajectoryRecorder" pkg="two_wheel" type="PathRecorder.py">
         <param name="csv_path" value="$(find two_wheel)/csv/$(arg filename)"/>
     </node>
 

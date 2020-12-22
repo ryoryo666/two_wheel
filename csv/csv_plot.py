@@ -12,10 +12,10 @@ number=int(raw_input("\nPlot File Number>> "))
 data=np.loadtxt(fname=file_list[number], delimiter = ",")
 
 x=data[:,1]
-y=data[:,2]
+y=data[:,4]
 
-#plt.plot(x,y,color="red", lw="1.0", label="RealMobileTrajectory")
-plt.scatter(x,y,color="red", lw="0.5")
+plt.plot(x,y,color="red", lw="1.0", label="RealMobileTrajectory")
+#plt.scatter(x,y,color="red", lw="0.5")
 
 # Label Name
 #plt.xlabel("Time[s]", fontsize=18)

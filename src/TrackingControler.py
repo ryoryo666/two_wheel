@@ -10,8 +10,8 @@ from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 
 #Euler
-kx = 40.0
-ky = 70.0
+kx = 1.9
+ky = 15.0
 kth = 10.0
 
 num = 1
@@ -24,15 +24,15 @@ def New_cmd(odom_msg):
 	y_p=odom_msg.pose.pose.position.y
 	theta_p=odom_msg.pose.pose.orientation.z
 
-	x_diff=Reference_Path[num][1]-x_p
-	y_diff=Reference_Path[num][2]-y_p
-	diff = math.sqrt((x_diff**2)+(y_diff**2))
+	while (num < stop):
+		x_diff=Reference_Path[num][1]-x_p
+		y_diff=Reference_Path[num][2]-y_p
+		diff = math.sqrt((x_diff**2)+(y_diff**2))
+		if 0.1 < diff:
+			print "Update"
+			break
+		num+=1
 
-	num+=1
-#	if diff < 0.1:
-#		num += 1
-#	elif diff < 0.1 :
-#		num += 2
 	shutdown()
 
 	print "Reference"
