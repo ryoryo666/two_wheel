@@ -13,8 +13,10 @@ last_x = 0.0
 last_y = 0.0
 last_th = 0.0
 
-def odom(msg):
+def odom(event):
     global last_x,last_y,last_th,last_Time,now_Time
+    msg = rospy.wait_for_message("/rpm_data", RL_RPM)
+
     R_data = msg.r_data
     L_data = msg.l_data
 
@@ -48,13 +50,11 @@ def odom(msg):
 if __name__=="__main__":
 	try:
 		rospy.init_node("Odom")
-		rospy.Subscriber("/rpm_data", RL_RPM, odom)
 		pub=rospy.Publisher("/Odometry", Odometry, queue_size=2)
 		Odom=Odometry()
 
-		start_Time = rospy.Time.now()
-		last_Time = start_Time
+		start_Time = 0.0
 
-		rospy.spin()
+		rospy.Timer(rospy.Duration(0.1), odom)
 
 	except rospy.ROSInterruptException: pass

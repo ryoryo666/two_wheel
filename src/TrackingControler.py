@@ -29,7 +29,7 @@ def New_cmd(odom_msg):
 		y_diff=Reference_Path[num][2]-y_p
 		diff = math.sqrt((x_diff**2)+(y_diff**2))
 		if 0.1 < diff:
-			print "Update"
+			print "\nUpdate"
 			break
 		num+=1
 

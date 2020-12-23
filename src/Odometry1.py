@@ -25,8 +25,8 @@ def odom(msg):
 	Odom.header.stamp.secs = t.secs
 	Odom.header.stamp.nsecs = t.nsecs
 
-	vr = round(R_data,4)*((2*math.pi)/60.0) * wr
-	vl = round(L_data,4)*((2*math.pi)/60.0) * wr
+	vr = round(R_data,6)*((2*math.pi)/60.0) * wr
+	vl = round(L_data,6)*((2*math.pi)/60.0) * wr
 	w = (vr-vl)/(2*d)
 
 	dL_r = vr*dt

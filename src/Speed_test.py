@@ -13,10 +13,17 @@ def pub():
     ref_v.r_ref = 10.0
     ref_v.l_ref = 10.0
     r=rospy.Rate(1)
+    i=0
 
     while not rospy.is_shutdown():
         pub.publish(ref_v)
         r.sleep()
+        i+=1
+        if i ==8:
+            ref_v.r_ref = 0.0
+            ref_v.l_ref = 0.0
+            pub.publish(ref_v)
+            break
 
 if __name__=="__main__":
     try:
