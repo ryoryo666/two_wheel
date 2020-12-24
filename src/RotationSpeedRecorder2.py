@@ -4,18 +4,20 @@
 #   Use one Arduino and two motors ver
 
 import rospy
-from two_wheel.msg import RPM2_Time
+from two_wheel.msg import RL_RPM
+from two_wheel.msg import RightLeft_cmd_value
 import os
 
 i=0
 def callback(msg):
-    global value,path_r,path_l,i
+    global value,path_r,path_l,i,start_Time
     r_value=msg.r_data#*60/(2*3.14)
     l_value=msg.l_data#*60/(2*3.14)
-    r_value=round(r_value,2)
-    l_value=round(l_value,2)
-    r_time=msg.time
-    l_time=msg.time
+
+    now_Time = rospy.Time.now()
+    t = now_Time - start_Time
+    r_time = t.secs + t.nsecs/(10.0**9.0)
+    l_time = t.secs + t.nsecs/(10.0**9.0)
 
     print "Left:{1}[rpm]    Right:{0}[rpm]". format(r_value,l_value)
 
@@ -27,13 +29,14 @@ def callback(msg):
         f.write(buf_l)
 
 def listener():
-    rospy.Subscriber("/rpm_data", RPM2_Time, callback)
+    global start_Time
+    rospy.Subscriber("/rpm_data", RL_RPM, callback)
 
     with open(path_r, mode="w"):
         print ""
     with open(path_l, mode="w"):
         print "Record Start"
-
+        
     rospy.spin()
 
 if __name__=="__main__":
@@ -42,5 +45,6 @@ if __name__=="__main__":
         rospy.init_node("Two_RotationSpeedRecoder", anonymous=False)
         path_r=rospy.get_param('~csv_path_r')
         path_l=rospy.get_param('~csv_path_l')
+        start_Time = rospy.Time.now()
         listener()
     except rospy.ROSInterruptException: pass

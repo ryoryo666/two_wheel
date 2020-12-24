@@ -10,13 +10,12 @@ def pub():
     rospy.init_node("Test_talker")
     pub=rospy.Publisher("New_cmd", RightLeft_cmd_value, queue_size=10)
     ref_v=RightLeft_cmd_value()
-    ref_v.r_ref = 10.0
-    ref_v.l_ref = 10.0
+    ref_v.r_ref = 1.0
+    ref_v.l_ref = 1.0
     r=rospy.Rate(1)
     i=0
 
-    print "Input:"
-    start = raw_input("")
+    start = raw_input("何か入力 >> ")
 
     if start != None:
         while not rospy.is_shutdown():

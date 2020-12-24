@@ -21,7 +21,7 @@ def localization():
     
     start_Time = rospy.Time.now()
     last_Time = start_Time
-    r = rospy.Rate(10)
+    r = rospy.Rate(20)
 
     while not rospy.is_shutdown():
         if rospy.wait_for_message("/rpm_data", RL_RPM) == None:

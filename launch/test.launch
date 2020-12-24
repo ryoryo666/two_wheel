@@ -4,7 +4,7 @@
 
   <node name="Speed_Publisher" pkg="two_wheel" type="Speed_test.py" output="screen"/>
 
-  <node name="Localization" pkg="two_wheel" type="Odometry1.py"/>
+  <node name="Localization" pkg="two_wheel" type="Odometry2.py"/>
 
   <node name="PathRecorder" pkg="two_wheel" type="PathRecorder.py">
         <param name="csv_path" value="$(find two_wheel)/csv/$(arg filename)"/>
