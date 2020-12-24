@@ -24,7 +24,7 @@ def Set():
     Start_check = RightLeft_cmd_value()
     while(1):
         Start_check = rospy.wait_for_message("/New_cmd", RightLeft_cmd_value)
-        if not Start_check:
+        if Start_check == None:
             continue
         break
         print("Record Start\n")

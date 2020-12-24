@@ -5,7 +5,7 @@
 
     <node name="Localization" pkg="two_wheel" type="$(arg Odometry_File)"/>
 
-    <node name="TrajectoryRecorder" pkg="two_wheel" type="PathRecorder.py">
+    <node name="PathRecorder" pkg="two_wheel" type="PathRecorder.py">
         <param name="csv_path" value="$(find two_wheel)/csv/$(arg filename)"/>
     </node>
 

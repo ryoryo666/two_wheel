@@ -37,13 +37,18 @@ def odom(msg):
     Odom.twist.twist.linear.x = v
     Odom.twist.twist.angular.z = w
 
-    print "x:{0}    y:{1}   V:{2}".format(round(Odom.pose.pose.position.x,2), round(Odom.pose.pose.position.y,2), round(v,2))
+    print "x:" + str(Odom.pose.pose.position.x)
+    print "y:" + str(Odom.pose.pose.position.y)
+    print "v:" + str(Odom.twist.twist.linear.x) + "\n"
     pub.publish(Odom)
 
     last_x = Odom.pose.pose.position.x
     last_y = Odom.pose.pose.position.y
     last_th = Odom.pose.pose.orientation.z
     last_Time = now_Time
+
+#def set():
+
 
 if __name__=="__main__":
 	try:

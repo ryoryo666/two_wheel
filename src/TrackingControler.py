@@ -83,6 +83,9 @@ if __name__=="__main__":
 		stop=len(Reference_Path)
 
 		pub=rospy.Publisher("/cmd_vel", Twist, queue_size=2)
+		check = rospy.wait_for_message(
+			
+		)
 		Set()
 
     except rospy.ROSInterruptException: pass

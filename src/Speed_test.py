@@ -15,15 +15,17 @@ def pub():
     r=rospy.Rate(1)
     i=0
 
-    while not rospy.is_shutdown():
-        pub.publish(ref_v)
-        r.sleep()
-        i+=1
-        if i ==8:
-            ref_v.r_ref = 0.0
-            ref_v.l_ref = 0.0
+    print "Input:"
+    start = raw_input("")
+
+    if start != None:
+        while not rospy.is_shutdown():
             pub.publish(ref_v)
-            break
+            r.sleep()
+            i+=1
+            if i ==5:
+                ref_v.r_ref = 0.0
+                ref_v.l_ref = 0.0
 
 if __name__=="__main__":
     try:

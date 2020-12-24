@@ -13,12 +13,21 @@ last_x = 0.0
 last_y = 0.0
 last_th = 0.0
 
-def odom(event):
-    global last_x,last_y,last_th,last_Time,now_Time
+def localization():
+    global last_x,last_y,last_th
+    rospy.init_node("Odom")
+    pub=rospy.Publisher("/Odometry", Odometry, queue_size=2)
+    Odom=Odometry()
+    
+    start_Time = rospy.Time.now()
+    last_Time = start_Time
     r = rospy.Rate(10)
 
     while not rospy.is_shutdown():
-        msg = rospy.wait_for_message("/rpm_data", RL_RPM, 1.0)
+        if rospy.wait_for_message("/rpm_data", RL_RPM) == None:
+            print "None"
+        else:
+            msg = rospy.wait_for_message("/rpm_data", RL_RPM)
 
         R_data = msg.r_data
         L_data = msg.l_data
@@ -42,9 +51,9 @@ def odom(event):
         Odom.twist.twist.linear.x = v
         Odom.twist.twist.angular.z = w
 
-        print "x:" + Odom.pose.pose.position.x
-        print "y:" + Odom.pose.pose.position.y
-        print "v:" + Odom.twist.twist.linear.x + "\n"
+        print "x:" + str(Odom.pose.pose.position.x)
+        print "y:" + str(Odom.pose.pose.position.y)
+        print "v:" + str(Odom.twist.twist.linear.x) + "\n"
         pub.publish(Odom)
 
         last_x = Odom.pose.pose.position.x
@@ -55,14 +64,7 @@ def odom(event):
         r.sleep()
 
 if __name__=="__main__":
-	try:
-		rospy.init_node("Odom")
-		pub=rospy.Publisher("/Odometry", Odometry, queue_size=2)
-		Odom=Odometry()
+    try:
+        localization()
 
-		start_Time = rospy.Time.now()
-        last_Time = start_Time
-
-        odom()
-
-	except rospy.ROSInterruptException: pass
+    except rospy.ROSInterruptException: pass
