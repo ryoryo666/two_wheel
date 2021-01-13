@@ -19,7 +19,7 @@ def callback(msg):
     r_time = t.secs + t.nsecs/(10.0**9.0)
     l_time = t.secs + t.nsecs/(10.0**9.0)
 
-    print "Left:{1}[rpm]    Right:{0}[rpm]". format(r_value,l_value)
+    print "Left:{1}[rad/s]    Right:{0}[rad/s]". format(r_value,l_value)
 
     buf_r=str(r_time)+","+str(r_value)+"\n"
     buf_l=str(l_time)+","+str(l_value)+"\n"
@@ -36,7 +36,7 @@ def listener():
         print ""
     with open(path_l, mode="w"):
         print "Record Start"
-        
+
     rospy.spin()
 
 if __name__=="__main__":
