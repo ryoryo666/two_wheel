@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="filename" default="RealPath.csv"/>
+    <arg name="filename" default="RealTrajectory.csv"/>
     <arg name="Odometry_File" default="Odometry1.py"/>
 
     <node name="Localization" pkg="two_wheel" type="$(arg Odometry_File)"/>
 
-    <node name="PathRecorder" pkg="two_wheel" type="PathRecorder.py">
+    <node name="TrajectoryRecorder" pkg="two_wheel" type="TrajectoryRecorder.py">
         <param name="csv_path" value="$(find two_wheel)/csv/$(arg filename)"/>
     </node>
 
@@ -13,7 +13,7 @@
         <param name="port" value="/dev/ttyACM0"/>
     </node>
 
-    <node name="NewCmdPublisher" pkg="two_wheel" type="RLTargetPublisher.py"/>
+    <node name="ActualCmdPublisher" pkg="two_wheel" type="RLTargetPublisher.py"/>
 
     <node name="Controler" pkg="two_wheel" type="TrackingControler.py" output="screen"/>
 </launch>

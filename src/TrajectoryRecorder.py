@@ -37,7 +37,7 @@ if __name__=="__main__":
         rospy.init_node("Path_Recorder", anonymous=False)
         rospack=rospkg.RosPack()
         df_path=rospack.get_path("two_wheel")
-        path=rospy.get_param('~csv_path',df_path+"/csv/RealPath.csv")
+        path=rospy.get_param('~csv_path',df_path+"/csv/RealReferenceTrajectory.csv")
         with open(path, mode="w") as f:
             print("/nNew Path")
 

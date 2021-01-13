@@ -75,7 +75,7 @@ if __name__=="__main__":
 		pack=rospack.get_path("two_wheel")
 		file_list=glob.glob(os.path.join(pack+"/csv", "Reference*"))
 		file_list.sort()
-		print ""
+		print "\nSelect Reference Trajectory\n"
 		for i in range(len(file_list)):
 			print str(i)+":"+file_list[i].replace(pack+"/csv/", "")
 		number=int(raw_input("\nFileNumber>> "))

@@ -10,11 +10,12 @@ for i in range(len(file_list)):
 	print str(i)+":"+file_list[i].replace(c_path+"/", "")
 number=int(raw_input("\nPlot File Number>> "))
 data=np.loadtxt(fname=file_list[number], delimiter = ",")
+file_name = file_list[number].replace(c_path+"/", "")
 
 x=data[:,1]
-y=data[:,4]
+y=data[:,2]
 
-plt.plot(x,y,color="red", lw="1.0", label="RealMobileTrajectory")
+plt.plot(x,y,color="red", lw="1.0", label=file_name)
 #plt.scatter(x,y,color="red", lw="0.5")
 
 # Label Name
