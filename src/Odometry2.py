@@ -19,8 +19,8 @@ def odom(msg):
     global last_x, last_y, last_th, last_Time, now_Time, pre_v, pre_w
     R_data = msg.r_data
     L_data = msg.l_data
-#    print "R:{0}    L:{1}".format(R_data, L_data)
-#    print "R:{0}    L:{1}".format(R_data*(30/math.pi), L_data*(30/math.pi))
+#    print "R:{0}[rad/s]    L:{1}[rad/s]".format(R_data, L_data)
+#    print "R:{0}[rpm]    L:{1}[rpm".format(R_data*(30/math.pi), L_data*(30/math.pi))
 
     now_Time = rospy.Time.now()
     dt = now_Time - last_Time
@@ -28,11 +28,12 @@ def odom(msg):
     t = now_Time - start_Time
     Odom.header.stamp.secs = t.secs
     Odom.header.stamp.nsecs = t.nsecs
-    print "t:{0}".format(t.secs + t.nsecs/10.0**9.0)
+#    print "t:{0}".format(t.secs + t.nsecs/10.0**9.0)
 #    print "dt:{0}".format(dt)
 
     vr = R_data * wr
     vl = L_data * wr
+#    print "Vr:{0}    vl:{1}".format(vr, vl)
     v  = (vr+vl)/2.0
     w = (vr-vl)/(2.0*d)
 #    print "V:{0}    W:{1}".format(v, w)
@@ -62,7 +63,7 @@ if __name__=="__main__":
 	try:
 		rospy.init_node("Odom")
 		rospy.Subscriber("/rpm_data", RL_RPM, odom)
-		pub=rospy.Publisher("/Odometry", Odometry, queue_size=2)
+		pub=rospy.Publisher("/Odometry", Odometry, queue_size=3)
 		Odom=Odometry()
 
 		start_Time = rospy.Time.now()
