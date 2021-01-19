@@ -15,8 +15,8 @@ file_name = file_list[number].replace(c_path+"/", "")
 x=data[:,1]
 y=data[:,2]
 
-plt.plot(x,y,color="red", lw="1.0", label=file_name)
-#plt.scatter(x,y,color="red", lw="0.5")
+#plt.plot(x,y,color="red", lw="1.0", label=file_name)
+plt.scatter(x,y,color= "red", s = 0.5)
 
 # Label Name
 #plt.xlabel("Time[s]", fontsize=18)
@@ -26,8 +26,8 @@ plt.plot(x,y,color="red", lw="1.0", label=file_name)
 
 # x/y Axis Limit
 lim=1.1
-plt.xlim(-0.1*lim,lim)
-plt.ylim(-0.1*lim,lim)
+plt.xlim(-1*lim,lim)
+plt.ylim(-1*lim,lim)
 
 # Position Adjustment
 plt.subplots_adjust(bottom=0.15)

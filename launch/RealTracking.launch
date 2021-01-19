@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="filename" default="RealTrajectory.csv"/>
-    <arg name="Odometry_File" default="Odometry1.py"/>
+    <arg name="filename" default="TrackingTrajectory.csv"/>
+    <arg name="Odometry_File" default="Odometry2.py"/>
 
     <node name="Localization" pkg="two_wheel" type="$(arg Odometry_File)"/>
 
@@ -15,5 +15,5 @@
 
     <node name="ActualCmdPublisher" pkg="two_wheel" type="RLTargetPublisher.py"/>
 
-    <node name="Controler" pkg="two_wheel" type="TrackingControler.py" output="screen"/>
+    <node name="Controler" pkg="two_wheel" type="TrackingControler2.py" output="screen"/>
 </launch>

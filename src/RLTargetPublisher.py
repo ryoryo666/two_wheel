@@ -6,17 +6,17 @@ import math
 from geometry_msgs.msg import Twist
 from two_wheel.msg import RightLeft_cmd_value
 
-Rw = 0.03825    # Wheel Radius [m]
-T  = 0.0615 * 2 # Distance between Wheels [m]
+Rw = 0.045   # Wheel Radius [m]
+T  = 0.062 * 2 # Distance between Wheels [m]
 
 def New_cmd(msg):
     v=msg.linear.x  # Translation Speed [m/s]
     w=msg.angular.z # Angular velocity
 
-#    ref_v.r_ref = (v/Rw)+((T*w)/(2*Rw)) #[rad / s]
-#    ref_v.l_ref = (v/Rw)-((T*w)/(2*Rw)) #[rad / s]
-    ref_v.r_ref = (v/Rw)+((T*w)/(2*Rw))/(2*math.pi)*60 #[rpm]
-    ref_v.l_ref = (v/Rw)-((T*w)/(2*Rw))/(2*math.pi)*60 #[rpm]
+    ref_v.r_ref = (v/Rw)+((T*w)/(2*Rw)) #[rad / s]
+    ref_v.l_ref = (v/Rw)-((T*w)/(2*Rw)) #[rad / s]
+#    ref_v.r_ref = (v/Rw)+((T*w)/(2*Rw))/(2*math.pi)*60 #[rpm]
+#    ref_v.l_ref = (v/Rw)-((T*w)/(2*Rw))/(2*math.pi)*60 #[rpm]
     pub.publish(ref_v)
 
 def set():

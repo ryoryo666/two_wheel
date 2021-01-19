@@ -6,12 +6,12 @@ import math
 from two_wheel.msg import RL_RPM
 from nav_msgs.msg import Odometry
 
-wr = 0.03825	# Wheel Radius [m]
-d  = 0.0615 	# Wheel-Center distance [m]
+wr = 0.045	# Wheel Radius [m]
+d  = 0.062 	# Wheel-Center distance [m]
 
-last_x = 0.0
+last_x = 0.25
 last_y = 0.0
-last_th = 0.0
+last_th = math.pi/2.0
 pre_v = 0.0
 pre_w = 0.0
 
@@ -38,9 +38,9 @@ def odom(msg):
     w = (vr-vl)/(2.0*d)
 #    print "V:{0}    W:{1}".format(v, w)
 
-    Odom.pose.pose.position.x +=  pre_v * dt * math.cos(Odom.pose.pose.orientation.z)
-    Odom.pose.pose.position.y +=  pre_v * dt * math.sin(Odom.pose.pose.orientation.z)
-    Odom.pose.pose.orientation.z += pre_w * dt
+    Odom.pose.pose.position.x = last_x + pre_v * dt * math.cos(Odom.pose.pose.orientation.z)
+    Odom.pose.pose.position.y = last_y + pre_v * dt * math.sin(Odom.pose.pose.orientation.z)
+    Odom.pose.pose.orientation.z = last_th + pre_w * dt
 
     Odom.twist.twist.linear.x = v
     Odom.twist.twist.angular.z = w
@@ -52,6 +52,9 @@ def odom(msg):
     print ""
     pub.publish(Odom)
 
+    last_x = Odom.pose.pose.position.x
+    last_y = Odom.pose.pose.position.y
+    last_th = Odom.pose.pose.orientation.z
     pre_v = v
     pre_w = w
     last_Time = now_Time
