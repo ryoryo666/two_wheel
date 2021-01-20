@@ -19,13 +19,13 @@ y=data[:,2]
 plt.scatter(x,y,color= "red", s = 0.5)
 
 # Label Name
-#plt.xlabel("Time[s]", fontsize=18)
-#plt.ylabel("[rpm]", fontsize=18)
+plt.xlabel("x[m]", fontsize=18)
+plt.ylabel("y[m]", fontsize=18)
 # Label Font Size
-#plt.tick_params(labelsize=15)
+plt.tick_params(labelsize=15)
 
 # x/y Axis Limit
-lim=1.1
+lim=0.5
 plt.xlim(-1*lim,lim)
 plt.ylim(-1*lim,lim)
 
