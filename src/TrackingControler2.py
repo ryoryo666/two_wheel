@@ -10,14 +10,14 @@ from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 
 # Parameter
-kx1 = 0.35  # P gain
-ky1 = 0.35
+kx1 = 0.25  # P gain
+ky1 = 0.25
 kx2 = 0.05  # D gain
 ky2 = 0.05
 v_max = 0.06
 w_max = 0.21
 
-qe = 0.05
+qe = 0.02
 uv = 0.0
 uw = 0.0
 

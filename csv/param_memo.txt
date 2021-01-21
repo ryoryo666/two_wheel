@@ -21,3 +21,12 @@ kx2 = 0.05
 ky2 = 0.05
 v_max = 0.0524
 w_max = 0.21
+
+TrackingTrajectory_DFL2-3
+kx1 = 0.25
+ky1 = 0.25
+kx2 = 0.05
+ky2 = 0.05
+v_max = 0.06
+w_max = 0.21
+qe = 0.02
