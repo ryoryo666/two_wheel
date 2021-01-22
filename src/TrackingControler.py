@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
+#	Kanayama Control Method
+
 import math
 import rospy
 import rospkg
@@ -9,12 +11,11 @@ import glob,os
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 
-#Euler
 kx = 0.5
 ky = 10.0
 kth = 5.0
 
-num = 1
+num = 0
 new_twist=Twist()
 
 def New_cmd(odom_msg):
@@ -24,26 +25,18 @@ def New_cmd(odom_msg):
 	y_p=odom_msg.pose.pose.position.y
 	theta_p=odom_msg.pose.pose.orientation.z
 
-#	while (num < stop):
-#		x_diff=Reference_Path[num][1]-x_p
-#		y_diff=Reference_Path[num][2]-y_p
-#		diff = math.sqrt((x_diff**2)+(y_diff**2))
-#		if 0.1< diff:
-#			print "\nUpdate"
-#			break
-#		num+=1
-	num += 1
 	shutdown()
 
 	print "Reference"
-	print "x:{0}	y:{1}".format(Reference_Path[num][1],Reference_Path[num][2])
+	print "x:{0}	y:{1}".format(Reference_Trajectory[num][1],Reference_Trajectory[num][2])
 
 	# Reference point on target trajectory
-	x_r=Reference_Path[num][1]
-	y_r=Reference_Path[num][2]
-	theta_r=Reference_Path[num][3]
-	v_r=Reference_Path[num][4]
-	w_r=Reference_Path[num][5]
+	x_r=Reference_Trajectory[num][1]
+	y_r=Reference_Trajectory[num][2]
+	theta_r=Reference_Trajectory[num][3]
+	v_r=Reference_Trajectory[num][4]
+	w_r=Reference_Trajectory[num][5]
+	num += 1
 
 	# Error value
 	x_err = (x_r-x_p)*math.cos(theta_p)+(y_r-y_p)*math.sin(theta_p)
@@ -79,8 +72,8 @@ if __name__=="__main__":
 		for i in range(len(file_list)):
 			print str(i)+":"+file_list[i].replace(pack+"/csv/", "")
 		number=int(raw_input("\nFileNumber>> "))
-		Reference_Path=np.loadtxt(file_list[number], delimiter = ",")
-		stop=len(Reference_Path)
+		Reference_Trajectory=np.loadtxt(file_list[number], delimiter = ",")
+		stop=len(Reference_Trajectory)
 
 		pub=rospy.Publisher("/cmd_vel", Twist, queue_size=2)
 		Set()

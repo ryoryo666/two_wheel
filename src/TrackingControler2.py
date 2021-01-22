@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
+#   Dynamic feedback linearization
+
 import math
 import rospy
 import rospkg

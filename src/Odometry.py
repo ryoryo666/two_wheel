@@ -6,7 +6,7 @@ import math
 from two_wheel.msg import RL_RPM
 from nav_msgs.msg import Odometry
 
-wr = 0.03825	# Wheel Radius [m]
+wr = 0.045  	# Wheel Radius [m]
 d  = 0.0615 	# Wheel-Center distance [m]
 
 last_x = 0.0
@@ -24,10 +24,7 @@ def localization():
     r = rospy.Rate(20)
 
     while not rospy.is_shutdown():
-        if rospy.wait_for_message("/rpm_data", RL_RPM) == None:
-            print "None"
-        else:
-            msg = rospy.wait_for_message("/rpm_data", RL_RPM)
+        msg = rospy.wait_for_message("/Encoder_data", RL_RPM)
 
         R_data = msg.r_data
         L_data = msg.l_data

@@ -30,7 +30,7 @@ def callback(msg):
 
 def listener():
     global start_Time
-    rospy.Subscriber("/rpm_data", RL_RPM, callback)
+    rospy.Subscriber("/Encoder_data", RL_RPM, callback)
 
     with open(path_r, mode="w"):
         print ""

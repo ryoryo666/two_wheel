@@ -21,7 +21,7 @@ def listener():
     path=rospy.get_param('~csv_path')
     with open(path, mode="w"):
         print "Record Start"
-    rospy.Subscriber("/rpm_data", RPM1_Time, callback)
+    rospy.Subscriber("/Encoder_data", RPM1_Time, callback)
     rospy.spin()
 
 if __name__=="__main__":

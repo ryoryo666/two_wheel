@@ -6,12 +6,14 @@ import math
 from two_wheel.msg import RL_RPM
 from nav_msgs.msg import Odometry
 
-wr = 0.045	# Wheel Radius [m]
-d  = 0.062 	# Wheel-Center distance [m]
+wr = 0.045  	# Wheel Radius [m]
+d  = 0.0615 	# Wheel-Center distance [m]
 
-last_x = 0.25
+#Initial Position
+last_x = 0.0
 last_y = 0.0
-last_th = math.pi/2.0
+last_th = 0.0
+
 pre_v = 0.0
 pre_w = 0.0
 
@@ -65,7 +67,7 @@ def odom(msg):
 if __name__=="__main__":
 	try:
 		rospy.init_node("Odom")
-		rospy.Subscriber("/rpm_data", RL_RPM, odom)
+		rospy.Subscriber("/Encoder_data", RL_RPM, odom)
 		pub=rospy.Publisher("/Odometry", Odometry, queue_size=3)
 		Odom=Odometry()
 

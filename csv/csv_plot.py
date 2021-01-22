@@ -25,9 +25,10 @@ plt.ylabel("y[m]", fontsize=18)
 plt.tick_params(labelsize=15)
 
 # x/y Axis Limit
-lim=0.5
-plt.xlim(-1*lim,lim)
-plt.ylim(-1*lim,lim)
+#x_lim = 2.0
+#y_lim = 2.0
+#plt.xlim(-1 * x_lim, x_lim)
+#plt.ylim(-1 * y_lim, y_lim)
 
 # Position Adjustment
 plt.subplots_adjust(bottom=0.15)

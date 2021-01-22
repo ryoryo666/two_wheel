@@ -15,7 +15,7 @@ def pub():
     r=rospy.Rate(1)
     i=0
 
-    start = raw_input("何か入力 >> ")
+    start = raw_input("何か入力でスタート >> ")
 
     if start != None:
         while not rospy.is_shutdown():
