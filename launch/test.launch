@@ -2,9 +2,8 @@
 <launch>
   <arg name="filename" default="TestRealTrackingTrajectory.csv"/>
 
-  <!--
   <node name="Speed_Publisher" pkg="two_wheel" type="Speed_test.py" output="screen"/>
--->
+
   <node name="Localization" pkg="two_wheel" type="Odometry2.py" output="screen"/>
 <!--
   <node name="TrajectoryRecorder" pkg="two_wheel" type="TrajectoryRecorder.py">
