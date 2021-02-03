@@ -40,13 +40,6 @@ def New_cmd(odom_msg):
         i = 0
 #    print "Xp:{0}    Yp:{1}".format(x_p,y_p)
 
-#    while (num < stop):
-#		x_diff=Reference_Trajectory[num][1]-x_p
-#		y_diff=Reference_Trajectory[num][2]-y_p
-#		diff = math.sqrt((x_diff**2)+(y_diff**2))
-#		if 0.15< diff:
-#			break
-#		num+=1
     shutdown()
 
 	# Reference point on Reference Trajectory
