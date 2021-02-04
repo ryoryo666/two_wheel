@@ -5,18 +5,20 @@ import matplotlib.pyplot as plt
 fig, ax=plt.subplots()
 
 c_path=os.path.dirname(os.path.abspath(__file__))
-file_list_M=glob.glob(os.path.join(c_path, "Tracking*"))
+file_list_T=glob.glob(os.path.join(c_path, "Tracking*"))
 file_list_R=glob.glob(os.path.join(c_path, "Reference*"))
-
-file_list_M.sort()
-for i in range(len(file_list_M)):
-	print str(i)+": "+file_list_M[i].replace(c_path+"/", "")
-number1=int(raw_input("File Number1>> "))
-data1=np.loadtxt(fname=file_list_M[number1], delimiter = ",")
-file_list_M[number1] = file_list_M[number1].replace(c_path+"/", "")
-
-print ""
+file_list_T.sort()
 file_list_R.sort()
+
+#追従結果軌道データを選択
+for i in range(len(file_list_T)):
+	print str(i)+": "+file_list_T[i].replace(c_path+"/", "")
+number1=int(raw_input("File Number1>> "))
+data1=np.loadtxt(fname=file_list_T[number1], delimiter = ",")
+file_list_T[number1] = file_list_T[number1].replace(c_path+"/", "")
+print ""
+
+#参照軌道データを選択
 for i in range(len(file_list_R)):
 	print str(i)+": "+file_list_R[i].replace(c_path+"/", "")
 number2=int(raw_input("File Number2>> "))
@@ -28,7 +30,7 @@ y1=data1[:,2]
 x2=data2[:,1]
 y2=data2[:,2]
 
-Real_label = file_list_M[number1].replace(".csv","")
+Real_label = file_list_T[number1].replace(".csv","")
 Reference_label = file_list_R[number2].replace(".csv","")
 
 ax.plot(x1,y1,color="green", label=Real_label)

@@ -1,19 +1,25 @@
+<!--実験で軌道追従を行う実行ファイル-->
 <?xml version="1.0"?>
 <launch>
+    <!--走行軌道ファイル名定義-->
     <arg name="filename" default="TrackingTrajectory.csv"/>
-    <arg name="Odometry_File" default="Odometry2.py"/>
 
-    <node name="Localization" pkg="two_wheel" type="$(arg Odometry_File)"/>
+    <!--オドメトリ計算ノード-->
+    <node name="Localization" pkg="two_wheel" type="Odometry2.py"/>
 
+    <!--走行軌道記録ノード-->
     <node name="TrajectoryRecorder" pkg="two_wheel" type="TrajectoryRecorder.py">
         <param name="csv_path" value="$(find two_wheel)/csv/$(arg filename)"/>
     </node>
 
+    <!--Arduinoとのシリアル通信ノード-->
     <node name="Arduino_node" pkg="rosserial_python" type="serial_node.py">
         <param name="port" value="/dev/ttyACM0"/>
     </node>
 
+    <!--ロボットの速度指令値から各モーターの回転角速度・回転数へ変換-->
     <node name="ActualCmdPublisher" pkg="two_wheel" type="RLTargetPublisher.py"/>
 
+    <!--軌道追従ノード-->
     <node name="Controler" pkg="two_wheel" type="TrackingControler2.py" output="screen"/>
 </launch>
