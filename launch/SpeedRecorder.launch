@@ -1,14 +1,18 @@
 <?xml version="1.0"?>
 <launch>
 
+  <!--左右モータ回転情報記録ファイル名定義-->
   <arg name="Name_R" default="R-rpm.csv"/>
   <arg name="Name_L" default="L-rpm.csv"/>
 
+  <!--左右モータ回転情報記録ノード-->
   <node name="Rotation_Speed_Recorder" pkg="two_wheel" type="RotationSpeedRecorder2.py" output="screen">
+    <!--ファイル保存先をパラメータサーバに登録-->
     <param name="csv_path_r" value="$(find two_wheel)/csv/$(arg Name_R)"/>
     <param name="csv_path_l" value="$(find two_wheel)/csv/$(arg Name_L)"/>
   </node>
 
+  <!--Arduinoとのシリアル通信ノード-->
   <node name="Arduino_node" pkg="rosserial_python" type="serial_node.py">
     <param name="port" value="/dev/ttyACM0"/>
     <!--<param name="baud" value="115200"/> -->

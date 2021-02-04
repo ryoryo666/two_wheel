@@ -42,7 +42,8 @@ if __name__=="__main__":
         df_path=rospack.get_path("two_wheel")   #パッケージtwo_wheelの絶対パス取得
         
         #記録データ保存先パス・ファイル名設定
-        #パラメータから取得　or パラメータから取得しなかった場合のデフォルト
+        #パラメータサーバから保存先を取得
+        #パラメータサーバに登録されていなかった場合の保存先定義
         path=rospy.get_param('~csv_path',df_path+"/csv/RealReferenceTrajectory.csv")
         with open(path, mode="w") as f:
             print("/nNew Reference Trajectory")
