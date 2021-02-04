@@ -1,22 +1,23 @@
+# -*- coding: utf-8 -*-
 #L-rpmとR-rpmを同時にグラフで表示
 import glob,os
 import numpy as np
 import matplotlib.pyplot as plt
 
-fig, ax=plt.subplots()
+fig, ax = plt.subplots()
 
-c_path=os.path.dirname(os.path.abspath(__file__))
+c_path = os.path.dirname(os.path.abspath(__file__))
 
-dataR=np.loadtxt(fname="R-rpm.csv", delimiter = ",")
-dataL=np.loadtxt(fname="L-rpm.csv", delimiter = ",")
+dataR=np.loadtxt(fname = c_path + "/R-rpm.csv", delimiter = ",")
+dataL=np.loadtxt(fname = c_path + "/L-rpm.csv", delimiter = ",")
 
-x1=dataR[:,0]
-y1=dataR[:,1]
-x2=dataL[:,0]
-y2=dataL[:,1]
+xR=dataR[:,0]
+yR=dataR[:,1]
+xL=dataL[:,0]
+yL=dataL[:,1]
 
-ax.plot(x1,y1,color="green", label="R-rpm")
-ax.plot(x2,y2,color="red", label="L-rpm")
+ax.plot(xR,yR,color="green", label="R-rpm")
+ax.plot(xL,yL,color="red", label="L-rpm")
 
 # Label Name
 ax.set_xlabel("t[s]", fontsize=18)

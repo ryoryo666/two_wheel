@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #参照軌道と追従結果をグラフで表示
 import glob,os
 import numpy as np

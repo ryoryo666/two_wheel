@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import glob,os
 import numpy as np
 import matplotlib.pyplot as plt
